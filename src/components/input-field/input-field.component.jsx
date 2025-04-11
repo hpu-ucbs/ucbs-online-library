@@ -1,8 +1,8 @@
 const FormInput = ({ label, id, error, ...otherProps }) => {
     return (
-        <div className={`flex flex-col justify-center relative ${error ? 'mb-8' : 'mb-4'}`}>
+        <div className={`flex flex-col justify-center relative ${error ? 'mb-0' : 'mb-0'}`}>
             {label && (
-                <label htmlFor={id}>{label}</label>
+                <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white" htmlFor={id}>{label}</label>
             )}
             <input
                 className={`h-10 mt-2 placeholder:font-normal placeholder:text-gray-500 px-2 font-normal border rounded-lg bg-[#F0F0F0] transition duration-200 ease-in-out 
