@@ -18,20 +18,20 @@ const CreateUser = (User, Users) => {
     return console.log("no User");
   }
   let exist = false;
-  Users.map((curUser) => {
+  Users && Users.map((curUser) => {
     if (curUser.name === User.name || parseInt(curUser.s_no) === User.s_no) {
       exist = true;
     }
     return [];
   });
-
   if (exist === true){
-    return alert("User already exist");
+    return "exists";
   } else{
     try{
         createUser(User);
+        return "added";
     } catch(error){
-        console.log(error);
+        return "error";
     }
   }
 }
@@ -60,17 +60,17 @@ export const UsersProvider = ({children}) => {
     }, []);
 
     const createThisUser = (User) => {
-        CreateUser(User, Users);
+        return CreateUser(User, Users);
     }
 
     const deleteThisUser = (User) => {
-        DeleteUser(User);
+        return DeleteUser(User);
     }
     const updateThisUser = (User) => {
-        UpdateUser(User);
+        return UpdateUser(User);
     }
     const getThisUser = (User) => {
-        GetUser(User, setclickedUser);
+        return GetUser(User, setclickedUser);
     }
 
     const value = {Users, setUsers, getThisUser, createThisUser, deleteThisUser, updateThisUser, clickedUser, setclickedUser, ibookclick, setibookclick};

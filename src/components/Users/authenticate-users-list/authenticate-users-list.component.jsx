@@ -1,17 +1,73 @@
-import { useContext, useState } from 'react';
-import { UsersContext } from '../../../context/users.context';
-import User from '../user/user.component';
+import { useContext } from 'react';
+import { AuthUserContext } from '../../../context/authenticate-user.context';
+import AuthUser from './auth-user.component';
 
+//toastify
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const AuthenticateUsersList = () => {
-    const { Users } = useContext(UsersContext);
-    const [userSearch, setuserSearch] = useState("");
-    const [course, setcourse] = useState("");
+    const { AuthUsers, DeleteAuthUser, AcceptAuthUser } = useContext(AuthUserContext);
+    //const [userSearch, setuserSearch] = useState("");
+    //const [course, setcourse] = useState("");
 
-    const handleChange = ({ target: { value } }) => setuserSearch(value);
-    const handleCourse = ({target: {value}}) => setcourse(value);
-    const filteredList = Users && Users.filter(user => user.name.toLowerCase().includes(userSearch.toLowerCase())).filter(user => user.course.toLowerCase().includes(course.toLowerCase()));
-  return (
+    //const handleChange = ({ target: { value } }) => setuserSearch(value);
+    //const handleCourse = ({target: {value}}) => setcourse(value);
+    //const filteredList = Users && Users.filter(user => user.name.toLowerCase().includes(userSearch.toLowerCase())).filter(user => user.course.toLowerCase().includes(course.toLowerCase()));
+    const handleAccept = (Authuser) => {
+        const result = AcceptAuthUser(Authuser);
+        if (result === "NoUser"){
+            return;
+        } else if (result === "added"){
+            toast.success("User Accepted", {
+                position: "top-center",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+            });
+        } else if (result === "exists"){
+            toast.error("User Already Exists", {
+                position: "top-center",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+            });
+        } else{
+            toast.error("Error Occured", {
+                position: "top-center",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+            });
+        }
+    }
+
+    const handleReject = (Authuser) => {
+        const result = DeleteAuthUser(Authuser);
+        if (result === "NoUser"){
+            return;
+        } else if (result === "Deleted"){
+            toast.success("User Rejected", {
+                position: "top-center",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+            });
+        } else{
+            toast.error("Error Occured", {
+                position: "top-center",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+            });
+        }
+    }
+    return (
     
     <>
            
@@ -76,59 +132,17 @@ const AuthenticateUsersList = () => {
                                 Course Year
                             </th>
                             <th scope="col" class="px-6 py-3">
-                                Status
-                            </th>
-                            <th scope="col" class="px-6 py-3">
                                 Action
                             </th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr class="bg-[#f0f0f0] border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200 hover:bg-[#c8c8c8] dark:hover:bg-gray-600">
-                            <td class="w-4 p-4">
-                                <div class="flex items-center">
-                                    <input id="checkbox-table-search-1" type="checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"/>
-                                    <label for="checkbox-table-search-1" class="sr-only">checkbox</label>
-                                </div>
-                            </td>
-                            <th scope="row" class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
-                                <img className='w-12 h-12' src="https://img.icons8.com/?size=120&id=85147&format=png&color=000000" alt="User Avatar"/>
-                                <div class="ps-3">
-                                    <div class="text-base font-semibold">Neil Sims</div>
-                                    <div class="font-normal text-gray-500">neil.sims@flowbite.com</div>
-                                </div>  
-                            </th>
-                            <td class="px-6 py-4">
-                                477258369
-                            </td>
-                            <td class="px-6 py-4">
-                                30/12/2003
-                            </td>
-                            <td class="px-6 py-4">
-                                2600
-                            </td>
-                            <td class="px-6 py-4">
-                                BCA
-                            </td>
-                            <td class="px-6 py-4">
-                                3rd Year
-                            </td>
-                            <td class="px-6 py-4">
-                                <div class="flex items-center">
-                                    <div class="h-2.5 w-2.5 rounded-full bg-green-500 me-2"></div> Approved
-                                </div>
-                            </td>
-                            <td class="px-6 py-4 space-x-4">
-                                <button class="bg-[#1b6c64] text-[#e0e1db] text-sm w-24 h-10 rounded-lg active:scale-95 transition ease-in-out duration-300 text-center">ACCEPT</button>
-                                <button class="bg-red-600 text-[#e0e1db] text-sm w-24 h-10 rounded-lg active:scale-95 transition ease-in-out duration-300 text-center">REJECT</button>                               
-                            </td>
-                        </tr>
+                        {AuthUsers && [...AuthUsers].sort((a, b) => new Date(b.$createdAt) - new Date(a.$createdAt)).map(user => (<AuthUser key={user.$id} user={user} handleAccept={handleAccept} handleReject={handleReject}/>))}
                     </tbody>
                 </table>
+                <ToastContainer/>
             </div>
-
         </>
-
   )
 }
 

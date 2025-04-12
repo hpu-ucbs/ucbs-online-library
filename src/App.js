@@ -39,7 +39,7 @@ const App = () => {
           <Route path="history" element={<Notification/>}>
             <Route index element={<BooksHistory/>}/>
             <Route path="fines" element={<FineHistory/>}/>
-            <Route path="users" element={<UserBooksHistory/>}/>
+            <Route path="users" element={<UserBooksHistory/>}/> 
           </Route>
           <Route path="manage-books" element={<ManageBooks/>}/>
           <Route path="manage-users" element={<ManageUsers/>}/>
