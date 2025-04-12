@@ -132,7 +132,7 @@ const SignUp = () => {
                               name="course"
                               id="course"
                               required="">
-                                <option value="default">Course</option>
+                                <option value="default"  hidden selected disabled >Course</option>
                                 <option value="BBA">BBA</option>
                                 <option value="BCA">BCA</option>
                             </select>
@@ -153,7 +153,7 @@ const SignUp = () => {
                                 name="courseYear"
                                 id="courseYear"
                                 required="">
-                                  <option value="default">Course Year</option>
+                                  <option value="default" hidden selected disabled >Course Year</option>
                                   <option value="firstYear">1st Year</option>
                                   <option value="secondYear">2nd Year</option>
                                   <option value="thirdYear">3rd Year</option>
