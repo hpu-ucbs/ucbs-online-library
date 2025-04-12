@@ -1,8 +1,11 @@
 import { Link } from "react-router-dom";
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import { ReactComponent as UcbsLogo } from "../../assets/img/home/ucbs-logo.svg";
 
 const LogIn = () => {
+
+  const location = useLocation(); 
+  const isActiveLink = (path) => location.pathname === path;
   
   return (
     <>
@@ -31,10 +34,10 @@ const LogIn = () => {
               <div>
                 <ul className="w-full flex text-sm font-medium text-center text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400">
                   <li className="w-full">
-                      <Link to={`/login/admin-login`} className="w-full inline-block p-4 rounded-t-lg text-md bg-gray-100 text-black font-semibold hover:bg-gray-300 dark:hover:bg-gray-800 dark:hover:text-gray-300" aria-current="page">Admin</Link>
+                      <Link to={`/login/admin-login`} className={`flex justify-center  items-center p-2 text-black font-semibold rounded-lg ${isActiveLink('/login/admin-login') ? 'bg-[#0a433d] text-white' : 'text-black hover:bg-gray-300 dark:hover:bg-gray-700 group'}`} aria-current="page">Admin</Link>
                   </li>
                   <li className="w-full">
-                      <Link to={`/login`} className="w-full inline-block p-4 rounded-t-lg text-md bg-gray-100 text-black font-semibold hover:bg-gray-300 dark:hover:bg-gray-800 dark:hover:text-gray-300">Student</Link>
+                      <Link to={`/login`} className={`flex justify-center items-center p-2 text-black font-semibold rounded-lg ${isActiveLink('/login') ? 'bg-[#0a433d] text-white' : 'text-black hover:bg-gray-300 dark:hover:bg-gray-700 group'}`}>Student</Link>
                   </li>
                 </ul>
                 
