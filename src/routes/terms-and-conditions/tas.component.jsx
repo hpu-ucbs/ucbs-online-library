@@ -4,7 +4,7 @@ const TermsAndConditions = () => {
   return (
     
     <>
-        <div className= "w-full h-full bg-gradient-to-b from-[#0a433d] via-[#0a433d63] to-[#C21717] py-16 text-gray-800 font-sans">
+        <div className= "w-full h-full bg-gradient-to-b from-[#0a433d] via-[#0a433d63] to-[#C21717] py-16 px-4 text-gray-800 font-sans">
             <div className="max-w-4xl mx-auto p-6 bg-gray-100 shadow-lg rounded-2xl">
                 <h1 className="text-3xl font-bold text-center mb-6 text-[#C21717]">Terms and Conditions</h1>
                 <p className="text-sm text-center text-gray-500 mb-8">Last updated: <span className="font-medium">4 April 2025</span></p>
@@ -59,7 +59,7 @@ const TermsAndConditions = () => {
 
                 <div>
                     <h2 className="text-xl font-semibold text-[#21736b]">8. Intellectual Property</h2>
-                    <p>The E-Library software is a project developed for educational purposes and remains the intellectual property of <a href='https:digitcrib.com/' target='_blank' rel='noreferrer'>DigitCrib™</a> & University College of Business Studies, as applicable. All trademarks, service marks, and logos are the property of their respective owners.</p>
+                    <p>The E-Library software is a project developed for educational purposes and remains the intellectual property of <a href='https://digitcrib.com/' target='_blank' rel='noreferrer'>DigitCrib™</a> & University College of Business Studies, as applicable. All trademarks, service marks, and logos are the property of their respective owners.</p>
                 </div>
 
                 <div>
