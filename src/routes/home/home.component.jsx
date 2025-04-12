@@ -42,10 +42,10 @@ const toggleMenu = () => setMenuOpen(!menuOpen);
                 <div className={`w-full ${menuOpen ? '' : 'hidden'}`}>
                   <div className="w-full items-center justify-between md:flex md:w-auto md:order-1  ">
                     <ul className="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-transparent md:bg-opacity-20 dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
-                      <li>
+                      {/* <li>
                       <div className="block py-2 px-3 text-white bg-[#0A433D] rounded md:bg-transparent md:text-[#C21717] md:p-0 md:dark:text-blue-500" aria-current="page">Home</div>
-                      </li>
-                      <li>
+                      </li> */}
+                      {/* <li>
                       <div className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:text-white md:hover:text-[#C21717] md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Book Inventory</div>
                       </li>
                       <li>
@@ -53,10 +53,13 @@ const toggleMenu = () => setMenuOpen(!menuOpen);
                       </li>
                       <li>
                       <div className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:text-white md:hover:text-[#C21717] md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">About Us</div>
+                      </li> */}
+                      <li className="mt-4">
+                      <Link to="/signup" className="block md:hidden text-white w-full bg-[#C21717] hover:bg-[#c21717e5] focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-[#C21717] dark:bg-[#c21717e5] dark:focus:ring-[#C21717]">Sign Up</Link>
                       </li>
                       <li className="mt-4">
                       <Link to="/login" className="block md:hidden text-white w-full bg-[#C21717] hover:bg-[#c21717e5] focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-[#C21717] dark:bg-[#c21717e5] dark:focus:ring-[#C21717]">Log In</Link>
-                    </li>
+                      </li>
                     </ul>
                   </div>
                 </div>
