@@ -9,6 +9,7 @@ import { ReactComponent as IssuedBook } from "../../assets/img/user-dashboard/bo
 import { ReactComponent as BookInventory } from "../../assets/img/user-dashboard/books-inventory.svg";
 import { ReactComponent as PayFine } from "../../assets/img/user-dashboard/pay-fine.svg";
 import { ReactComponent as LibLogo } from "../../assets/img/lib-logo.svg";
+import 'flowbite';
 
 const UserNav = () => {
   const navigate = useNavigate();

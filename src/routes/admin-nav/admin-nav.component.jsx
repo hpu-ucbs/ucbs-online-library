@@ -7,6 +7,7 @@ import { ReactComponent as UcbsLogo } from "../../assets/img/home/ucbs-logo.svg"
 import { ReactComponent as BookInventory } from "../../assets/img/user-dashboard/books-inventory.svg";
 import { ReactComponent as About } from "../../assets/img/user-dashboard/about.svg";
 import { ReactComponent as LibLogo } from "../../assets/img/lib-logo.svg";
+import 'flowbite';
 
 const AdminNav = () => {
   const navigate = useNavigate();
