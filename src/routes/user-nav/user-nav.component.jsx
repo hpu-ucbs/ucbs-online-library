@@ -252,8 +252,6 @@ const UserNav = () => {
       {!curUser ? <h1>Loading...</h1> : <Outlet context={[curUser]}/>}
       </div>
 
-      <script src="../node_modules/flowbite/dist/flowbite.min.js"></script>
-
     </>
 
   )
