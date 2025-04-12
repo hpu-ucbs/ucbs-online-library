@@ -78,7 +78,7 @@ const toggleMenu = () => setMenuOpen(!menuOpen);
                     <p>(A State Government University Accredited with 'A' grade by NAAC)</p>
                   </div>
                   <div className="w-full h-auto grid grid-cols-1 md:grid-cols-2 gap-4 py-8">
-                    <div>
+                    <div className="px-4">
                       <div className="font-medium text-white lg:text-lg xl:text-2xl">A <span className="text-[#06FFFF]"><a href="https://digitcrib.com/" rel="noreferrer" target="_blank">DigitCrib</a></span> Solution.</div>
                       <div>
                         <h1 className=" xxsm:text-3xl font-bold text-white xl:text-5xl my-[0.5rem] md:my-[1rem] md:w-[34rem]">The UCBS library is now available online.</h1>
@@ -86,7 +86,7 @@ const toggleMenu = () => setMenuOpen(!menuOpen);
                       <div>
                         <p className="text-[#dddddd] md:w-[384px] lg:text-lg font-medium">The UCBS digital library provides students and faculty with an advanced method of managing book inventory online, allowing students to select from a wide range of books.</p>
                       </div>
-                      </div>
+                    </div>
                   <div>
                 </div>
                 </div>
@@ -104,30 +104,22 @@ const toggleMenu = () => setMenuOpen(!menuOpen);
         <div className="py-[64px]">
           <div className="px-[64px]">
             <div className="flex flex-col justify-center items-center gap-4 w-full">
-              <div>
-                <h3 className="text-2xl font-medium">Search Books</h3>
+              <div className="flex flex-col justify-center items-center w-full">
+                <div className="text-3xl font-semibold uppercase">Search Books</div>
+                <hr className="bg-black text-black w-14 text-center h-1"/>
               </div>
               <div className="mt-4">							
                 <form className="w-full mx-auto">
                   <div className="flex">
-                    <label htmlFor="search-dropdown" className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Your Email</label>
-                    <button id="dropdown-button" data-dropdown-toggle="dropdown" className="flex-shrink-0 z-10 inline-flex items-center py-2.5 px-4 text-sm font-medium text-center text-gray-900 bg-gray-100 border border-gray-300 rounded-s-lg hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700 dark:text-white dark:border-gray-600" type="button">Course 
-                      <svg className="w-2.5 h-2.5 ms-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-                        <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 1 4 4 4-4"/>
-                      </svg>
-                    </button>
-                    <div id="dropdown" className="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
-                      <ul className="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdown-button">
-                      <li>
-                        <button type="button" className="inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">BCA</button>
-                      </li>
-                      <li>
-                        <button type="button" className="inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">BBA</button>
-                      </li>
-                      </ul>
+                    <div>
+                      <select name="course" id="course" className="flex-shrink-0 z-10 inline-flex items-center py-2.5 px-4 text-sm font-medium text-center text-gray-900 bg-gray-100 border border-gray-300 rounded-s-lg hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700 dark:text-white dark:border-gray-600">
+                        <option value="default" className="inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" disabled selected hidden >Course</option>
+                        <option value="BBA" className="inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">BBA</option>
+                        <option value="BCA" className="inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">BCA</option>              
+                      </select>
                     </div>
                     <div className="relative w-full">
-                      <input type="search" id="search-dropdown" className="block p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-e-lg border-s-gray-50 border-s-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-s-gray-700  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500" placeholder="Search For..." required />
+                      <input type="search" id="search-dropdown" className="block p-2.5 w-56 sm:w-[30vw] z-20 text-sm text-gray-900 bg-gray-50 rounded-e-lg border-s-gray-50 border-s-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-s-gray-700  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500" placeholder="Search For Books..." required />
                       <button type="submit" className="absolute top-0 end-0 p-2.5 text-sm font-medium h-full text-white bg-blue-700 rounded-e-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                         <svg className="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
                           <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
@@ -353,7 +345,7 @@ const toggleMenu = () => setMenuOpen(!menuOpen);
           </div>
           <hr className="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
           <div className="flex sitems-center justify-center">
-            <span className="text-sm text-gray-500 text-center dark:text-gray-400">© 2024 <a href="https://digitcrib.com/" className="hover:underline">DigitCrib™</a>. All Rights Reserved.
+            <span className="text-sm text-gray-500 text-center dark:text-gray-400">© 2025 <a href="https://digitcrib.com/" className="hover:underline">DigitCrib™</a>. All Rights Reserved.
             </span> 
           </div>
         </div>

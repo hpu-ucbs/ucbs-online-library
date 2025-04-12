@@ -12,10 +12,10 @@ const UserIssuedBooks = () => {
                 <div className="mb-4 h-full">
 
                     <div>
-                        <div className="py-[2rem]">
-                            <div className="px-[2rem]">
+                        <div className="py-4 sm:py-[2rem]">
+                            <div className="px-0 sm:px-[2rem]">
                                 <div>
-                                    <h1 className="text-4xl font-bold">Issued Books.</h1>
+                                    <h1 className="text-3xl sm:text-4xl font-bold">Issued Books.</h1>
                                 </div>                  
                             </div>
                         </div>
@@ -23,10 +23,10 @@ const UserIssuedBooks = () => {
 
                     <div>
                         <div>
-                            <div className="px-[2rem] md:px-0 lg:px-[2rem]">
+                            <div className="px-0 sm:px-[2rem] md:px-0 lg:px-[2rem]">
                                                 
                                 <div className="my-4">
-                                    <div className="w-full grid grid-cols-1 justify-items-center content-center gap-x-4 gap-y-8 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xxl:grid-cols-5">
+                                    <div className="w-full grid grid-cols-1 xxsm:grid-cols-2 justify-items-center content-center gap-x-4 gap-y-8 lg:grid-cols-3 xl:grid-cols-4 xxl:grid-cols-5">
                                     {curUser.book ? curUser.book.map((book) => (
                                     <ShowBook key={book.s_no} book_item={book}></ShowBook>
                                     )) : <p>No books issued</p>}

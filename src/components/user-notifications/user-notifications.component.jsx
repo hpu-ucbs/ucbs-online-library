@@ -16,30 +16,30 @@ const UserNotifications = () => {
                 <div className="mb-4 h-full">
 
                     <div>
-                        <div className="py-[2rem]">
-                            <div className="px-[2rem]">
+                        <div className="py-4 sm:py-[2rem]">
+                            <div className="px-0 sm:px-[2rem]">
                                 <div>
-                                    <h1 className="text-4xl font-bold">Book Issued & Returned History.</h1>
+                                    <h1 className="text-3xl sm:text-4xl font-bold">Book Issued <br className="sm:hidden" /> & Returned History.</h1>
                                 </div>                  
                             </div>
                         </div>
                     </div>
 
-                    <div className="w-full px-[2rem] md:px-0 lg:px-[2rem]">   
+                    <div className="w-full sm:px-[2rem] md:px-0 lg:px-[2rem]">   
                         <div className="relative overflow-x-auto overflow-y-auto">
                             <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                                <thead className="text-xs text-gray-700 uppercase bg-gray-300 dark:bg-gray-700 dark:text-gray-400">
+                                <thead className="text-[10px] sm:text-xs text-gray-700 uppercase bg-gray-300 dark:bg-gray-700 dark:text-gray-400">
                                 <tr className="text-center font-bold">
-                                    <td className="px-6 py-4">
+                                    <td className="px-2 sm:px-6 py-4">
                                         <p>Name</p>
                                     </td>
-                                    <td className="px-6 py-4">
+                                    <td className="px-2 sm:px-6 py-4">
                                         <p>Book</p>
                                     </td>
-                                    <td className="px-6 py-4">
+                                    <td className="px-2 sm:px-6 py-4">
                                         <p>Issue Date</p>
                                     </td>
-                                    <td className="px-6 py-4">
+                                    <td className="px-2 sm:px-6 py-4">
                                         <p>Return Date</p>
                                     </td>
                                 </tr>  
