@@ -119,13 +119,13 @@ const SignUp = () => {
 
                       <div className={`flex justify-between items-center ${errors.course || errors.roll_no ? 'mt-0' : 'mb-0'}`}>
                         <div>
-                            <FormInput error={errors.roll_no} onChange={handleChange} label={"Enter Class Roll No."} type="number" name="roll_no" id="roll_no" placeholder="••••" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required=""/>
+                            <FormInput error={errors.roll_no} onChange={handleChange} label={"Enter Class Roll No."} type="number" name="roll_no" id="roll_no" placeholder="••••" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-36 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required=""/>
                         </div>
                         
                         <div className="relative">
                             <label htmlFor="course" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Enter Course</label>
                             <select
-                              className={`bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-[120px] p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 ${
+                              className={`bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-[130px] sm:w-52 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 ${
                                 errors.course ? 'border-red-500' : 'border-black'
                             }`}
                               onChange={handleChange}
@@ -142,6 +142,12 @@ const SignUp = () => {
                                     <div className="absolute left-2 bottom-[-5px] w-3 h-3 bg-red-500 rotate-45"></div>
                                 </div>
                             )}
+                        </div>
+                        
+                      </div>
+                      <div className="flex justify-between items-center">
+                        <div>
+                          <FormInput error={errors.password} onChange={handleChange} label={"Enter Date of Birth"} type="date" name="password" id="password" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-36 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required=""/>
                         </div>
                         <div>
                           <label htmlFor="courseYear" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Enter Course Year</label>
@@ -165,9 +171,6 @@ const SignUp = () => {
                                   </div>
                               )}
                         </div>
-                      </div>
-                      <div>
-                          <FormInput error={errors.password} onChange={handleChange} label={"Enter Date of Birth"} type="date" name="password" id="password" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required=""/>
                       </div>
                       <div className="flex items-start">
                           <div className="flex items-center">
