@@ -1,6 +1,8 @@
+import { useEffect, useState } from "react";
 import { Link, Outlet, useNavigate, useLocation } from "react-router-dom";
 import { ReactComponent as ManageBookImg } from "../../../src/assets/img/admin-dashboard/manage-book.svg";
 import { ReactComponent as ManageUserImg } from "../../../src/assets/img/admin-dashboard/manage-user.svg";
+import { ReactComponent as AuthenticateUserImg } from "../../../src/assets/img/admin-dashboard/authenticate-user.svg";
 import { ReactComponent as HistoryImg } from "../../../src/assets/img/admin-dashboard/history.svg";
 import { ReactComponent as IssueFineImg } from "../../../src/assets/img/admin-dashboard/issue-fine.svg";
 import { ReactComponent as UcbsLogo } from "../../assets/img/home/ucbs-logo.svg";
@@ -18,6 +20,35 @@ const AdminNav = () => {
     navigate("/login");
   }
 
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const handleMobileNavClick = () => {
+    if (window.innerWidth < 768) {
+      setIsDrawerOpen(false);
+      window.scrollTo(0, 0);
+    }
+  };
+
+  useEffect(() => {
+      const handleClickOutside = (event) => {
+        const dropdown = document.getElementById("dropdown");
+        const avatarBtn = document.getElementById("user-menu-button");
+        if (
+          dropdown &&
+          avatarBtn &&
+          !dropdown.contains(event.target) &&
+          !avatarBtn.contains(event.target)
+        ) {
+          setIsDropdownOpen(false);
+        }
+      };
+    
+      document.addEventListener("mousedown", handleClickOutside);
+      return () => {
+        document.removeEventListener("mousedown", handleClickOutside);
+      };
+    }, []);
+
   const isActiveLink = (path) => location.pathname === path;
   return(
     <>  
@@ -29,8 +60,7 @@ const AdminNav = () => {
               <div className="flex flex-wrap justify-between items-center">
                 <div className="flex justify-start items-center">
                   <button
-                    data-drawer-target="drawer-navigation"
-                    data-drawer-toggle="drawer-navigation"
+                    onClick={() => setIsDrawerOpen(!isDrawerOpen)}
                     aria-controls="drawer-navigation"
                     className="p-2 mr-2 text-gray-600 rounded-lg cursor-pointer md:hidden hover:text-gray-900 hover:bg-gray-100 focus:bg-gray-100 dark:focus:bg-gray-700 focus:ring-2 focus:ring-gray-100 dark:focus:ring-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
                   >
@@ -111,8 +141,8 @@ const AdminNav = () => {
                     type="button"
                     className="flex mx-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
                     id="user-menu-button"
-                    aria-expanded="false"
-                    data-dropdown-toggle="dropdown"
+                    aria-expanded={isDropdownOpen}
+                    onClick={() => setIsDropdownOpen(prev => !prev)}
                   >
                     <span className="sr-only">Open admin menu</span>
                     <UcbsLogo className="w-8 h-8 rounded-full"/>
@@ -120,8 +150,7 @@ const AdminNav = () => {
 
                   {/* <!-- Dropdown menu --> */}
                   <div
-                    className="hidden z-50 my-4 w-56 text-base list-none bg-white  divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600 rounded-xl"
-                    id="dropdown"
+                    className={`${isDropdownOpen ? 'block' : 'hidden'} z-50 my-4 w-56 text-base list-none bg-white divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600 rounded-xl absolute top-12 right-4`} id="dropdown"
                   >
                     <div className="py-3 px-4">
                       <span
@@ -136,7 +165,7 @@ const AdminNav = () => {
 
         {/* <!-- Sidebar --> */}
         <aside
-          className="fixed top-0 left-0 z-40 w-64 h-screen pt-14 transition-transform -translate-x-full bg-white border-r border-gray-200 md:translate-x-0 dark:bg-gray-800 dark:border-gray-700"
+          className={`fixed top-0 left-0 z-40 w-64 h-screen pt-14 transition-transform ${isDrawerOpen ? "translate-x-0" : "-translate-x-full"} bg-white border-r border-gray-200 md:translate-x-0 dark:bg-gray-800 dark:border-gray-700`}
           aria-label="Sidenav"
           id="drawer-navigation"
         >
@@ -144,37 +173,37 @@ const AdminNav = () => {
             
             <ul className="space-y-2 pt-5 mt-2 border-gray-300">
               <li>                                                               
-                <Link to="/admin-dashboard " className={`flex items-center p-2 text-gray-900 rounded-lg ${isActiveLink('/admin-dashboard') ? 'bg-gray-300' : 'text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-700 group'}`}>
-                  <ManageBookImg className="w-5 h-5 flex-shrink-0 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"/>
+                <Link to="/admin-dashboard" onClick={handleMobileNavClick} className={`flex items-center p-2 text-gray-900 rounded-lg ${isActiveLink('/admin-dashboard') ? 'bg-gray-300' : 'text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-700 group'}`}>
+                <AuthenticateUserImg className="w-5 h-5 flex-shrink-0 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"/>
                   <span className="flex-1 ms-3 whitespace-nowrap">Authenticate User</span>
                 </Link>
               </li>
               <li>                                                               
-                <Link to="/admin-dashboard/manage-users" className={`flex items-center p-2 text-gray-900 rounded-lg ${isActiveLink('/admin-dashboard/manage-users') ? 'bg-gray-300' : 'text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-700 group'}`}>
+                <Link to="/admin-dashboard/manage-users" onClick={handleMobileNavClick} className={`flex items-center p-2 text-gray-900 rounded-lg ${isActiveLink('/admin-dashboard/manage-users') ? 'bg-gray-300' : 'text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-700 group'}`}>
                   <ManageUserImg className="w-5 h-5 flex-shrink-0 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"/>
                   <span className="flex-1 ms-3 whitespace-nowrap">Manage Users</span>
                 </Link>
               </li>
               <li>                                                               
-                <Link to="/admin-dashboard/manage-books" className={`flex items-center p-2 text-gray-900 rounded-lg ${isActiveLink('/admin-dashboard/manage-books') ? 'bg-gray-300' : 'text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-700 group'}`}>
+                <Link to="/admin-dashboard/manage-books" onClick={handleMobileNavClick} className={`flex items-center p-2 text-gray-900 rounded-lg ${isActiveLink('/admin-dashboard/manage-books') ? 'bg-gray-300' : 'text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-700 group'}`}>
                   <ManageBookImg className="w-5 h-5 flex-shrink-0 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"/>
                   <span className="flex-1 ms-3 whitespace-nowrap">Manage Books</span>
                 </Link>
               </li>
               <li>      
-                <Link to="/admin-dashboard/book-inventory" className={`flex items-center p-2 text-gray-900 rounded-lg ${isActiveLink('/admin-dashboard/book-inventory') ? 'bg-gray-300' : 'text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-700 group'}`}>
+                <Link to="/admin-dashboard/book-inventory" onClick={handleMobileNavClick} className={`flex items-center p-2 text-gray-900 rounded-lg ${isActiveLink('/admin-dashboard/book-inventory') ? 'bg-gray-300' : 'text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-700 group'}`}>
                   <BookInventory className="w-5 h-5 flex-shrink-0 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"/>
                   <span className="flex-1 ms-3 whitespace-nowrap">Book Inventory</span>
                 </Link>
               </li>
               <li>
-                <Link to="/admin-dashboard/issue-fine" className={`flex items-center p-2 text-gray-900 rounded-lg ${isActiveLink('/admin-dashboard/issue-fine') ? 'bg-gray-300' : 'text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-700 group'}`}>
+                <Link to="/admin-dashboard/issue-fine" onClick={handleMobileNavClick} className={`flex items-center p-2 text-gray-900 rounded-lg ${isActiveLink('/admin-dashboard/issue-fine') ? 'bg-gray-300' : 'text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-700 group'}`}>
                   <IssueFineImg className="w-5 h-5 flex-shrink-0 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"/>                    
                   <span className="flex-1 ms-3 whitespace-nowrap">Issue Fine</span>
                 </Link>
               </li>
               <li>
-                <Link to="/admin-dashboard/history" className={`flex items-center p-2 text-gray-900 rounded-lg ${isActiveLink('/admin-dashboard/history') ? 'bg-gray-300' : 'text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-700 group'}`}>
+                <Link to="/admin-dashboard/history" onClick={handleMobileNavClick} className={`flex items-center p-2 text-gray-900 rounded-lg ${isActiveLink('/admin-dashboard/history') ? 'bg-gray-300' : 'text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-700 group'}`}>
                   <HistoryImg className="w-5 h-5 flex-shrink-0 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"/>                    
                   <span className="flex-1 ms-3 whitespace-nowrap">History</span>
                 </Link>

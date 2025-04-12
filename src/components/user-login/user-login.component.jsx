@@ -51,7 +51,7 @@ const UserLogIn = () => {
       <form className="max-w-lg w-full mx-auto">
 
         <div className="mt-8">
-            <FormInput type="text" placeholder="Enter User ID" onChange={handleChange} label="User id" name="user_id" value={user_id} id="user_id" svgIcon={SvgComponent1}/>
+            <FormInput type="text" placeholder="Enter User ID" onChange={handleChange} label="User ID" name="user_id" value={user_id} id="user_id" svgIcon={SvgComponent1}/>
         </div>
       
         <div className="mt-8">

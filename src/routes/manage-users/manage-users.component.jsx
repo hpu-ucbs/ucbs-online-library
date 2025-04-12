@@ -20,7 +20,7 @@ const ManageUsers = () => {
             </div>
              :
             <div>
-                <div className="grid grid-cols-3 gap-0 w-full">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-0 w-full">
                     <div className="col-span-2">
                         <UpdateNewUser/>
                     </div>

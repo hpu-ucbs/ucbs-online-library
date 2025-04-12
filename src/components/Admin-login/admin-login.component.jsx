@@ -50,7 +50,7 @@ const AdminLogIn = () => {
       <form className="max-w-lg w-full mx-auto">
 
         <div className="mt-8">
-            <FormInput type="text" placeholder="Enter Admin ID" onChange={handleChange} label="Admin Id" name="admin_id" id="admin_id" value={admin_id} svgIcon={SvgComponent1}/>
+            <FormInput type="text" placeholder="Enter Admin ID" onChange={handleChange} label="Admin ID" name="admin_id" id="admin_id" value={admin_id} svgIcon={SvgComponent1}/>
         </div>
 
         <div className="mt-8">
