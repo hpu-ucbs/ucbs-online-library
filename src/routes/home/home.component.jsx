@@ -25,10 +25,10 @@ const toggleMenu = () => setMenuOpen(!menuOpen);
               
               <nav className="bg-transparent bg-opacity-20 fixed w-full z-20 top-0 start-0">
                 <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-8">
-                <div className="flex items-center space-x-3 rtl:space-x-reverse bg-white/30 backdrop-blur-md border border-white/20 rounded-3xl py-1 px-4">
+                <a href="https://ucbs-online-library.vercel.app/" target="_blank" rel="noreferrer" className="flex items-center space-x-3 rtl:space-x-reverse bg-white/30 backdrop-blur-md border border-white/20 rounded-3xl py-1 px-4">
                   <LibLogo className="h-11 w-11" alt="UCBS Library Management System Logo"/>
                   <span className="self-center text-2xl font-semibold whitespace-nowrap text-white">UCBS Library</span>
-                </div>
+                </a>
                 <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
                   <Link to="/signup" className="hidden md:block text-white bg-[#C21717] hover:bg-[#c21717e5] focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-8 py-2 text-center mr-4">Sign Up </Link>
                   <Link to="/login" className="hidden md:block text-white bg-[#C21717] hover:bg-[#c21717e5] focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-8 py-2 text-center">Log In</Link>
@@ -303,7 +303,7 @@ const toggleMenu = () => setMenuOpen(!menuOpen);
         <div className="mx-auto w-full max-w-screen-xl px-[1.5rem] py-[2rem]">
           <div className="md:flex md:justify-between">
             <div className="mb-8 md:mb-0">
-              <a href="https://flowbite.com/" className="flex items-center ">
+              <a href="https://ucbs-online-library.vercel.app/" className="flex items-center ">
                 <LibLogo className="h-14 w-14 mr-3" alt="UCBS Library Management System Logo"/>
                 <span className="self-center text-2xl font-semibold whitespace-nowrap text-white">UCBS Library</span>
               </a>
