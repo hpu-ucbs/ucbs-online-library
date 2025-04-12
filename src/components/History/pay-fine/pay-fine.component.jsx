@@ -16,17 +16,17 @@ const PayFine = () => {
                     <div className="mb-4 h-full">
 
                         <div>
-                            <div className="py-[2rem]">
-                                <div className="px-[2rem]">
+                            <div className="py-4 sm:py-[2rem]">
+                                <div className="px-0 sm:px-[2rem]">
                                     <div>
-                                        <h1 className="text-4xl font-bold">Pay Fine.</h1>
+                                        <h1 className="text-3xl sm:text-4xl font-bold">Pay Fine.</h1>
                                     </div>                  
                                 </div>
                             </div>
                         </div>
 
                         <div>
-                            <div className="px-[2rem] md:px-0 lg:px-[2rem]">
+                            <div className="sm:px-[2rem] md:px-0 lg:px-[2rem]">
 
                                 <div className="grid grid-cols-1 sm:grid-cols-2 justify-items-center content-center gap-4">                        
                                     <div className="block w-full p-6 bg-blue-300 border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
@@ -45,7 +45,7 @@ const PayFine = () => {
 
                         <div>
                             <div className="py-[3rem]">
-                                <div className="px-[2rem]">
+                                <div className="sm:px-[2rem]">
                                     <div className="px-6">
                                         <ul className="list-decimal">
                                             <li>Total Fine - <span className="font-semibold">Total fine paid till date.</span></li>
@@ -57,31 +57,31 @@ const PayFine = () => {
                         </div>
 
                         <div>
-                            <div className="py-[2rem]">
-                                <div className="px-[2rem]">
+                            <div className="py-4 sm:py-[2rem]">
+                                <div className="sm:px-[2rem]">
                                     <div>
-                                        <h1 className="text-4xl font-bold">Fine History.</h1>
+                                        <h1 className="text-3xl sm:text-4xl font-bold">Fine History.</h1>
                                     </div>                  
                                 </div>
                             </div>
                         </div>
 
                         <div>
-                            <div className="w-full px-[2rem] md:px-0 lg:px-[2rem]">   
+                            <div className="w-full sm:px-[2rem] md:px-0 lg:px-[2rem]">   
                             <div className="relative overflow-x-auto overflow-y-auto">
                                 <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                                    <thead className="text-xs text-gray-700 uppercase bg-gray-300 dark:bg-gray-700 dark:text-gray-400">
+                                    <thead className="text-[10px] sm:text-xs text-gray-700 uppercase bg-gray-300 dark:bg-gray-700 dark:text-gray-400">
                                         <tr className="text-center">
-                                            <th scope="col" className="px-6 py-3">
+                                            <th scope="col" className="px-2 sm:px-6 py-3">
                                                 Student Name
                                             </th>                                         
-                                            <th scope="col" className="px-6 py-3">
+                                            <th scope="col" className="px-2 sm:px-6 py-3">
                                                 Amount
                                             </th>
-                                            <th scope="col" className="px-6 py-3">
+                                            <th scope="col" className="px-2 sm:px-6 py-3">
                                                 Fine Alloted On
                                             </th>
-                                            <th scope="col" className="px-6 py-3">
+                                            <th scope="col" className="px-2 sm:px-6 py-3">
                                                 Fine Paid On
                                             </th>
                                         </tr>

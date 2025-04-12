@@ -95,10 +95,10 @@ const SignUp = () => {
 
   return (
     <>
-      <section className="bg-home-bg bg-cover bg-center bg-no-repeat">
+      <section className="bg-home-bg bg-cover w-full h-screen bg-center bg-no-repeat">
         <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
-          <Link to="/ " className="flex items-center gap-x-4 mb-8 text-3xl font-semibold text-white">
-            <LibLogo className="h-11 w-11" alt="UCBS Library Management System Logo"/>
+          <Link to="/ " className="flex items-center gap-x-2 mb-8 text-2xl text-center md:text-3xl font-semibold text-white">
+            <LibLogo className="w-20 h-20" alt="UCBS Library Management System Logo"/>
              University College of Business Studies
           </Link>
           <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
@@ -116,21 +116,23 @@ const SignUp = () => {
                       <div> 
                           <FormInput error={errors.email} onChange={handleChange} label={"Enter Email"} type="email" name="email" id="email" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="example@gmail.com" required=""/>
                       </div>
+
                       <div className={`flex justify-between items-center ${errors.course || errors.roll_no ? 'mt-0' : 'mb-0'}`}>
                         <div>
                             <FormInput error={errors.roll_no} onChange={handleChange} label={"Enter Class Roll No."} type="number" name="roll_no" id="roll_no" placeholder="••••" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required=""/>
                         </div>
+                        
                         <div className="relative">
                             <label htmlFor="course" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Enter Course</label>
                             <select
-                              className={`bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 ${
+                              className={`bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-[120px] p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 ${
                                 errors.course ? 'border-red-500' : 'border-black'
                             }`}
                               onChange={handleChange}
                               name="course"
                               id="course"
                               required="">
-                                <option value="">Choose Course</option>
+                                <option value="default">Course</option>
                                 <option value="BBA">BBA</option>
                                 <option value="BCA">BCA</option>
                             </select>
@@ -140,6 +142,28 @@ const SignUp = () => {
                                     <div className="absolute left-2 bottom-[-5px] w-3 h-3 bg-red-500 rotate-45"></div>
                                 </div>
                             )}
+                        </div>
+                        <div>
+                          <label htmlFor="courseYear" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Enter Course Year</label>
+                              <select
+                                className={`bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-[130px] sm:w-52 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 ${
+                                  errors.courseYear ? 'border-red-500' : 'border-black'
+                              }`}
+                                onChange={handleChange}
+                                name="courseYear"
+                                id="courseYear"
+                                required="">
+                                  <option value="default">Course Year</option>
+                                  <option value="firstYear">1st Year</option>
+                                  <option value="secondYear">2nd Year</option>
+                                  <option value="thirdYear">3rd Year</option>
+                              </select>
+                              {errors.courseYear && (
+                                  <div className="absolute -top-8 left-0 bg-red-500 text-white text-xs font-medium px-2 py-1 rounded-md shadow-lg z-10">
+                                      <p className='pb-1'>{errors.courseYear}</p>
+                                      <div className="absolute left-2 bottom-[-5px] w-3 h-3 bg-red-500 rotate-45"></div>
+                                  </div>
+                              )}
                         </div>
                       </div>
                       <div>
