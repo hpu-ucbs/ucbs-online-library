@@ -8,19 +8,22 @@ import { BooksProvider } from './context/books.context';
 import { UsersProvider } from './context/users.context';
 import { UsersHistoryProvider } from './context/usershistory.context';
 import { AdminProvider } from './context/admin.context';
+import { AuthUserProvider } from './context/authenticate-user.context';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <BrowserRouter>
       <AdminProvider>
-        <UsersProvider>
-          <BooksProvider>
-            <UsersHistoryProvider>
-              <App />
-            </UsersHistoryProvider>
-          </BooksProvider>
-        </UsersProvider>
+          <UsersProvider>
+            <BooksProvider>
+              <UsersHistoryProvider>
+                <AuthUserProvider>
+                  <App />
+                </AuthUserProvider>  
+              </UsersHistoryProvider>
+            </BooksProvider>
+          </UsersProvider>
       </AdminProvider>
     </BrowserRouter>
   </React.StrictMode>

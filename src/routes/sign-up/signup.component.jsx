@@ -1,4 +1,4 @@
-import { useState, useContext, useEffect } from "react";
+import { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 
 //toast
@@ -7,17 +7,20 @@ import 'react-toastify/dist/ReactToastify.css';
 
 import FormInput from "../../components/input-field/input-field.component";
 import { ReactComponent as LibLogo } from "../../assets/img/lib-logo.svg";
+import { AuthUserContext } from "../../context/authenticate-user.context";
 
 const userCreds = {
   name: "",
-  registrationId: "",
+  user_id: "",
   email: "",
-  classRollNo: "",
+  roll_no: "",
   course: "",
-  dob: "",
+  password: "",
+  year: 1,
 }
 
 const SignUp = () => {
+  const { CreateAuthUser } = useContext(AuthUserContext);
   const [selectedUser, setselectedUser] = useState(userCreds);
   const [errors, setErrors] = useState({});
 
@@ -32,23 +35,23 @@ const SignUp = () => {
       newErrors.name = "Name is required";
     }
 
-    if (!user.registrationId || user.registrationId.toString().length !== 9) {
-      newErrors.registrationId = "Registration ID must be exactly 9 digits";
+    if (!user.user_id || user.user_id.toString().length !== 9) {
+      newErrors.user_id = "Registration ID must be exactly 9 digits";
     }
 
     if (!user.email || !user.email.includes("@")) {
       newErrors.email = "Email is required";
     }
 
-    if (!user.classRollNo || user.classRollNo < 1000 || user.classRollNo > 9999) {
-      newErrors.classRollNo = "Range is 1000 and 9999";
+    if (!user.roll_no || user.roll_no < 1000 || user.roll_no > 9999) {
+      newErrors.roll_no = "Range is 1000 and 9999";
     }
 
     if (!user.course || (user.course !== "BCA" && user.course !== "BBA")) {
       newErrors.course = "Select BCA or BBA";
     }
-    if (!user.dob) {
-      newErrors.dob = "Date of Birth is required";
+    if (!user.password) {
+      newErrors.password = "Date of Birth is required";
     }
 
     return newErrors;
@@ -58,14 +61,35 @@ const SignUp = () => {
     e.preventDefault();
     const newErrors = validateForm(selectedUser);
     setErrors(newErrors);
-    if (Object.keys(newErrors).length = 0) {
-      toast.success("Account sent for approval",{
-        position: "top-center",
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-      })
+    if (Object.keys(newErrors).length === 0) {
+      let result = CreateAuthUser(selectedUser);
+      if (result === "exists") {
+        toast.error("Account already exists", {
+          position: "top-center",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+        });
+      }
+      else if (result === "added") {
+        toast.success("Account sent for approval",{
+          position: "top-center",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+        })
+      }
+      else {
+        toast.error(result, {
+          position: "top-center",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+        });
+      }
     }
   };
 
@@ -87,12 +111,17 @@ const SignUp = () => {
                           <FormInput error={errors.name} onChange={handleChange} label={"Enter Full Name"} type="text" name="name" id="name" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="John Doe" required=""/>
                       </div>
                       <div>
-                          <FormInput error={errors.registrationId} onChange={handleChange} label={"Enter University Registration No."} type="number" name="registrationId" id="registrationId" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="•••••••••" required=""/>
+                          <FormInput error={errors.user_id} onChange={handleChange} label={"Enter University Registration No."} type="number" name="user_id" id="user_id" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="•••••••••" required=""/>
                       </div>
                       <div> 
                           <FormInput error={errors.email} onChange={handleChange} label={"Enter Email"} type="email" name="email" id="email" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="example@gmail.com" required=""/>
                       </div>
-                      <div className={`flex justify-between items-center ${errors.course || errors.courseYear ? 'mt-0' : 'mb-0'}`}>
+
+                      <div className={`flex justify-between items-center ${errors.course || errors.roll_no ? 'mt-0' : 'mb-0'}`}>
+                        <div>
+                            <FormInput error={errors.roll_no} onChange={handleChange} label={"Enter Class Roll No."} type="number" name="roll_no" id="roll_no" placeholder="••••" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required=""/>
+                        </div>
+                        
                         <div className="relative">
                             <label htmlFor="course" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Enter Course</label>
                             <select
@@ -137,13 +166,8 @@ const SignUp = () => {
                               )}
                         </div>
                       </div>
-                      <div className={`flex justify-between items-center ${errors.classRollNo || errors.dob ? 'mt-0' : 'mb-0'}`}>
-                        <div>
-                            <FormInput error={errors.classRollNo} onChange={handleChange} label={"Enter Class Roll No."} type="number" name="classRollNo" id="classRollNo" placeholder="••••" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-[120px] p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required=""/>
-                        </div>
-                        <div>
-                            <FormInput error={errors.dob} onChange={handleChange} label={"Enter Date of Birth"} type="date" name="dob" id="dob" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-[130px] sm:w-52 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required=""/>
-                        </div>
+                      <div>
+                          <FormInput error={errors.password} onChange={handleChange} label={"Enter Date of Birth"} type="date" name="password" id="password" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required=""/>
                       </div>
                       <div className="flex items-start">
                           <div className="flex items-center">
