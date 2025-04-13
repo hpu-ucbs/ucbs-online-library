@@ -218,6 +218,7 @@ const UpdateNewUser = () => {
                                 )}
                             </div>
                         </div>
+                        
                         <IssuedBook />
                         {!ibookclick && clickedUser.name && <button className="bg-blue-500 hover:bg-blue-700 text-white py-1 px-2 rounded text-base" onClick={handleBook}>Add Issued Books</button>}
                         {ibookclick && <button className="bg-blue-500 hover:bg-blue-700 text-white py-1 px-2 rounded text-base" onClick={handleBack}>Back</button>}
