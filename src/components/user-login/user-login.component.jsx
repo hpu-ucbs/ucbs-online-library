@@ -55,7 +55,7 @@ const UserLogIn = () => {
         </div>
       
         <div className="mt-8">
-            <FormInput type="password" placeholder="Enter Password" onChange={handleChange} label="Password (use format DD-MM-YYYY)" name="password" id="password" value={password} svgIcon={SvgComponent2}/>
+            <FormInput type="password" placeholder="Enter Password" onChange={handleChange} label="Password (use format DD/MM/YYYY)" name="password" id="password" value={password} svgIcon={SvgComponent2}/>
         </div>
 
         <div className="mt-8">
