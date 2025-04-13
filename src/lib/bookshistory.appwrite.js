@@ -2,7 +2,7 @@ import { ID, Query } from "appwrite";
 import { databases } from "./appwrite";
 
 const database_id = '67fabdd40004716ba175';
-const collection_id = '67fac5ae000b39d44623';
+const collection_id = '67fac4490028a14391da';
 
 export const createBooksHistory = async (bookid) => {
     const currentDate = new Date();

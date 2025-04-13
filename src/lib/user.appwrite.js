@@ -44,7 +44,7 @@ export const deleteUser = async (DocID) => {
 }
 
 export const updateUser = async (user) => {
-    let { user_id, password, name, roll_no, course, year, fine, book, amount_paid } = user;
+    let { user_id, password, name, roll_no, course, year, fine, book, amount_paid, email } = user;
     user_id = parseInt(user_id);
     roll_no = parseInt(roll_no);
     year = parseInt(year);
@@ -54,14 +54,15 @@ export const updateUser = async (user) => {
         collection_id,
         user.$id,
         {
-            user_id,
             password,
+            user_id,
             name,
             roll_no,
             course,
             year,
             fine,
             amount_paid,
+            email,
             book,
         }
     );

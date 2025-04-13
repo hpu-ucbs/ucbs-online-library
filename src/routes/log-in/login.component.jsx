@@ -45,8 +45,8 @@ const LogIn = () => {
 
               <Outlet/>
 
-              <p class="text-sm font-light text-black dark:text-gray-400 mt-5 font-sans">
-                  New User? Create account <Link to="/signup" class="font-semibold text-[#0a433d] hover:underline dark:text-primary-500 underline">Signup here</Link>
+              <p className="text-sm font-light text-black dark:text-gray-400 mt-5 font-sans">
+                  New User? Create account <Link to="/signup" className="font-semibold text-[#0a433d] hover:underline dark:text-primary-500 underline">Signup here</Link>
               </p>  
             
             </div> 

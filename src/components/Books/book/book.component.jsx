@@ -10,7 +10,7 @@ const Book = ({book_item}) => {
     return(
         <>
             <div className="grid grid-cols-2 border border-gray-500 rounded-xl p-5">
-                <img className="rounded-md cursor-pointer w-[200px]" onClick={handleClick} src={image_url} alt={title} />
+                <img className="rounded-md cursor-pointer w-[200px]" onClick={() => handleClick()} src={image_url} alt={title} />
                 <div className="flex flex-col self-center items-start gap-y-2">
                     <div className="font-bold">
                         {title}

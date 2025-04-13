@@ -1,4 +1,6 @@
 import "./output.css";
+import {ToastContainer} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { Routes, Route } from "react-router-dom";
 import Home from './routes/home/home.component';
 import SignUp from "./routes/sign-up/signup.component";
@@ -26,6 +28,18 @@ import TermsAndConditions from "./routes/terms-and-conditions/tas.component";
 const App = () => {
   return (
     <>
+      <ToastContainer
+        position="top-center"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
       <Routes>
       <Route path="/" element={<Home/>} />
         <Route path="/signup" element={<SignUp/>}/>
