@@ -21,6 +21,7 @@ import BooksHistory from "./components/History/history-books/bookshistory.compon
 import FineHistory from "./components/History/history-fines/finehistory.component";
 import UserBooksHistory from "./components/History/history-user-books/userbookshistory.component";
 import AuthenticateUser from "./routes/authenticate-user/authenticate-user.component";
+import TermsAndConditions from "./routes/terms-and-conditions/tas.component";
 
 const App = () => {
   return (
@@ -28,6 +29,7 @@ const App = () => {
       <Routes>
       <Route path="/" element={<Home/>} />
         <Route path="/signup" element={<SignUp/>}/>
+        <Route path="/tas" element={<TermsAndConditions/>}/>
         <Route path="/login" element={<LogIn/>}> 
           <Route index element={<UserLogIn/>} />
           <Route path="admin-login" element={<AdminLogIn/>} />      

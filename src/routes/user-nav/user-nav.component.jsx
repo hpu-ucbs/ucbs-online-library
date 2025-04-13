@@ -9,7 +9,6 @@ import { ReactComponent as IssuedBook } from "../../assets/img/user-dashboard/bo
 import { ReactComponent as BookInventory } from "../../assets/img/user-dashboard/books-inventory.svg";
 import { ReactComponent as PayFine } from "../../assets/img/user-dashboard/pay-fine.svg";
 import { ReactComponent as LibLogo } from "../../assets/img/lib-logo.svg";
-import 'flowbite';
 
 const UserNav = () => {
   const navigate = useNavigate();
@@ -46,6 +45,36 @@ const UserNav = () => {
     navigate("/login");
   };
 
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const handleMobileNavClick = () => {
+    if (window.innerWidth < 768) {
+      setIsDrawerOpen(false);
+      window.scrollTo(0, 0);
+    }
+  };
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      const dropdown = document.getElementById("dropdown");
+      const avatarBtn = document.getElementById("user-menu-button");
+      if (
+        dropdown &&
+        avatarBtn &&
+        !dropdown.contains(event.target) &&
+        !avatarBtn.contains(event.target)
+      ) {
+        setIsDropdownOpen(false);
+      }
+    };
+  
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
   const location = useLocation(); 
   const isActiveLink = (path) => location.pathname === path;
 
@@ -61,8 +90,7 @@ const UserNav = () => {
             
             <div className="flex justify-start items-center">
               <button
-                data-drawer-target="drawer-navigation"
-                data-drawer-toggle="drawer-navigation"
+                 onClick={() => setIsDrawerOpen(!isDrawerOpen)}
                 aria-controls="drawer-navigation"
                 className="p-2 mr-2 text-gray-600 rounded-lg cursor-pointer md:hidden hover:text-gray-900 hover:bg-gray-100 focus:bg-gray-100 dark:focus:bg-gray-700 focus:ring-2 focus:ring-gray-100 dark:focus:ring-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
               >
@@ -143,25 +171,24 @@ const UserNav = () => {
                 type="button"
                 className="flex mx-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
                 id="user-menu-button"
-                aria-expanded="false"
-                data-dropdown-toggle="dropdown"
+                aria-expanded={isDropdownOpen}
+                onClick={() => setIsDropdownOpen(prev => !prev)}
               >
                 <span className="sr-only">Open user menu</span>
                 <UcbsLogo className="w-8 h-8 rounded-full"/>
               </button> 
 
-               {/* <!-- Dropdown menu --> */}
-               <div className="hidden z-50 my-4 w-56 text-base list-none bg-white divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600 rounded-xl"
-                  id="dropdown" >
-                  <div className="py-3 px-4">
-                    <span className="block text-sm text-gray-900 dark:text-white">
-                      User Name: <span className="font-semibold">{name}</span>
-                    </span>
-                    <span className="block text-sm text-gray-900 truncate dark:text-white">
-                      User ID: <span className="font-semibold">{user_id}</span>
-                    </span>
-                  </div>
+              {/* <!-- Dropdown menu --> */}
+              <div className={`${isDropdownOpen ? 'block' : 'hidden'} z-50 my-4 w-56 text-base list-none bg-white divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600 rounded-xl absolute top-12 right-4`} id="dropdown" >
+                <div className="py-3 px-4">
+                  <span className="block text-sm text-gray-900 dark:text-white">
+                    User Name: <span className="font-semibold">{name}</span>
+                  </span>
+                  <span className="block text-sm text-gray-900 truncate dark:text-white">
+                    User ID: <span className="font-semibold">{user_id}</span>
+                  </span>
                 </div>
+              </div>
 
             </div>
             
@@ -170,7 +197,7 @@ const UserNav = () => {
 
         {/* <!-- Sidebar --> */}
         <aside
-            className="fixed top-0 left-0 z-40 w-64 h-screen pt-14 transition-transform -translate-x-full bg-white border-r border-gray-200 md:translate-x-0 dark:bg-gray-800 dark:border-gray-700"
+            className={`fixed top-0 left-0 z-40 w-64 h-screen pt-14 transition-transform ${isDrawerOpen ? "translate-x-0" : "-translate-x-full"} bg-white border-r border-gray-200 md:translate-x-0 dark:bg-gray-800 dark:border-gray-700`}
             aria-label="Sidenav"
             id="drawer-navigation"
           >
@@ -192,25 +219,25 @@ const UserNav = () => {
               
               <ul className="space-y-2 pt-5 mt-2 border-t border-gray-300">
                 <li>                                                               
-                  <Link to="/user-dashboard " className={`flex items-center p-2 text-gray-900 rounded-lg ${isActiveLink('/user-dashboard') ? 'bg-gray-300' : 'text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-700 group'}`}>
+                  <Link to="/user-dashboard" onClick={handleMobileNavClick} className={`flex items-center p-2 text-gray-900 rounded-lg ${isActiveLink('/user-dashboard') ? 'bg-gray-300' : 'text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-700 group'}`}>
                     <IssuedBook className="w-5 h-5 flex-shrink-0 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"/>
                     <span className="flex-1 ms-3 whitespace-nowrap">Issued Books</span>
                   </Link>
                 </li>
                 <li>      
-                  <Link to="/user-dashboard/book-inventory" className={`flex items-center p-2 text-gray-900 rounded-lg ${isActiveLink('/user-dashboard/book-inventory') ? 'bg-gray-300' : 'text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-700 group'}`}>
+                  <Link to="/user-dashboard/book-inventory" onClick={handleMobileNavClick} className={`flex items-center p-2 text-gray-900 rounded-lg ${isActiveLink('/user-dashboard/book-inventory') ? 'bg-gray-300' : 'text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-700 group'}`}>
                     <BookInventory className="w-5 h-5 flex-shrink-0 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"/>
                     <span className="flex-1 ms-3 whitespace-nowrap">Book Inventory</span>
                   </Link>
                 </li>
                 <li>
-                  <Link to="/user-dashboard/notifications" className={`flex items-center p-2 text-gray-900 rounded-lg ${isActiveLink('/user-dashboard/notifications') ? 'bg-gray-300' : 'text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-700 group'}`}>
+                  <Link to="/user-dashboard/notifications" onClick={handleMobileNavClick} className={`flex items-center p-2 text-gray-900 rounded-lg ${isActiveLink('/user-dashboard/notifications') ? 'bg-gray-300' : 'text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-700 group'}`}>
                     <PayFine className="w-5 h-5 flex-shrink-0 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"/>                    
                     <span className="flex-1 ms-3 whitespace-nowrap">Book History</span>
                   </Link>
                 </li>
                 <li>
-                  <Link to="/user-dashboard/pay-fine" className={`flex items-center p-2 text-gray-900 rounded-lg ${isActiveLink('/user-dashboard/pay-fine') ? 'bg-gray-300' : 'text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-700 group'}`}>
+                  <Link to="/user-dashboard/pay-fine" onClick={handleMobileNavClick} className={`flex items-center p-2 text-gray-900 rounded-lg ${isActiveLink('/user-dashboard/pay-fine') ? 'bg-gray-300' : 'text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-700 group'}`}>
                     <PayFine className="w-5 h-5 flex-shrink-0 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"/>                    
                     <span className="flex-1 ms-3 whitespace-nowrap">Pay Fine & History</span>
                   </Link>
@@ -252,6 +279,8 @@ const UserNav = () => {
       <div className="md:ml-64 pt-20">
       {!curUser ? <h1>Loading...</h1> : <Outlet context={[curUser]}/>}
       </div>
+
+      <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
 
     </>
 

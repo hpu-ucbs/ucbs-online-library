@@ -72,16 +72,16 @@ const PayFine = () => {
                                 <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                                     <thead className="text-[10px] sm:text-xs text-gray-700 uppercase bg-gray-300 dark:bg-gray-700 dark:text-gray-400">
                                         <tr className="text-center">
-                                            <th scope="col" className="px-2 sm:px-6 py-3">
+                                            <th scope="col" className="px-1.5 sm:px-6 py-4 border-gray-700 border">
                                                 Student Name
                                             </th>                                         
-                                            <th scope="col" className="px-2 sm:px-6 py-3">
+                                            <th scope="col" className="px-1.5 sm:px-6 py-4 border-gray-700 border">
                                                 Amount
                                             </th>
-                                            <th scope="col" className="px-2 sm:px-6 py-3">
+                                            <th scope="col" className="px-1.5 sm:px-6 py-4 border-gray-700 border">
                                                 Fine Alloted On
                                             </th>
-                                            <th scope="col" className="px-2 sm:px-6 py-3">
+                                            <th scope="col" className="px-1.5 sm:px-6 py-4 border-gray-700 border">
                                                 Fine Paid On
                                             </th>
                                         </tr>

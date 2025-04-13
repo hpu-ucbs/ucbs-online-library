@@ -25,10 +25,10 @@ const toggleMenu = () => setMenuOpen(!menuOpen);
               
               <nav className="bg-transparent bg-opacity-20 fixed w-full z-20 top-0 start-0">
                 <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-8">
-                <div className="flex items-center space-x-3 rtl:space-x-reverse bg-white/30 backdrop-blur-md border border-white/20 rounded-3xl py-1 px-4">
+                <a href="https://ucbs-online-library.vercel.app/" target="_blank" rel="noreferrer" className="flex items-center space-x-3 rtl:space-x-reverse bg-white/30 backdrop-blur-md border border-white/20 rounded-3xl py-1 px-4">
                   <LibLogo className="h-11 w-11" alt="UCBS Library Management System Logo"/>
                   <span className="self-center text-2xl font-semibold whitespace-nowrap text-white">UCBS Library</span>
-                </div>
+                </a>
                 <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
                   <Link to="/signup" className="hidden md:block text-white bg-[#C21717] hover:bg-[#c21717e5] focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-8 py-2 text-center mr-4">Sign Up </Link>
                   <Link to="/login" className="hidden md:block text-white bg-[#C21717] hover:bg-[#c21717e5] focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-8 py-2 text-center">Log In</Link>
@@ -42,10 +42,10 @@ const toggleMenu = () => setMenuOpen(!menuOpen);
                 <div className={`w-full ${menuOpen ? '' : 'hidden'}`}>
                   <div className="w-full items-center justify-between md:flex md:w-auto md:order-1  ">
                     <ul className="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-transparent md:bg-opacity-20 dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
-                      <li>
+                      {/* <li>
                       <div className="block py-2 px-3 text-white bg-[#0A433D] rounded md:bg-transparent md:text-[#C21717] md:p-0 md:dark:text-blue-500" aria-current="page">Home</div>
-                      </li>
-                      <li>
+                      </li> */}
+                      {/* <li>
                       <div className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:text-white md:hover:text-[#C21717] md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Book Inventory</div>
                       </li>
                       <li>
@@ -53,10 +53,13 @@ const toggleMenu = () => setMenuOpen(!menuOpen);
                       </li>
                       <li>
                       <div className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:text-white md:hover:text-[#C21717] md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">About Us</div>
+                      </li> */}
+                      <li className="mt-4">
+                      <Link to="/signup" className="block md:hidden text-white w-full bg-[#C21717] hover:bg-[#c21717e5] focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-[#C21717] dark:bg-[#c21717e5] dark:focus:ring-[#C21717]">Sign Up</Link>
                       </li>
                       <li className="mt-4">
                       <Link to="/login" className="block md:hidden text-white w-full bg-[#C21717] hover:bg-[#c21717e5] focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-[#C21717] dark:bg-[#c21717e5] dark:focus:ring-[#C21717]">Log In</Link>
-                    </li>
+                      </li>
                     </ul>
                   </div>
                 </div>
@@ -303,7 +306,7 @@ const toggleMenu = () => setMenuOpen(!menuOpen);
         <div className="mx-auto w-full max-w-screen-xl px-[1.5rem] py-[2rem]">
           <div className="md:flex md:justify-between">
             <div className="mb-8 md:mb-0">
-              <a href="https://flowbite.com/" className="flex items-center ">
+              <a href="https://ucbs-online-library.vercel.app/" className="flex items-center ">
                 <LibLogo className="h-14 w-14 mr-3" alt="UCBS Library Management System Logo"/>
                 <span className="self-center text-2xl font-semibold whitespace-nowrap text-white">UCBS Library</span>
               </a>

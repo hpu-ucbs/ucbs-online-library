@@ -30,16 +30,16 @@ const UserNotifications = () => {
                             <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                                 <thead className="text-[10px] sm:text-xs text-gray-700 uppercase bg-gray-300 dark:bg-gray-700 dark:text-gray-400">
                                 <tr className="text-center font-bold">
-                                    <td className="px-2 sm:px-6 py-4">
+                                    <td className="px-2 sm:px-6 py-4 border-gray-700 border">
                                         <p>Name</p>
                                     </td>
-                                    <td className="px-2 sm:px-6 py-4">
+                                    <td className="px-2 sm:px-6 py-4 border-gray-700 border ">
                                         <p>Book</p>
                                     </td>
-                                    <td className="px-2 sm:px-6 py-4">
+                                    <td className="px-2 sm:px-6 py-4 border-gray-700 border">
                                         <p>Issue Date</p>
                                     </td>
-                                    <td className="px-2 sm:px-6 py-4">
+                                    <td className="px-2 sm:px-6 py-4 border-gray-700 border">
                                         <p>Return Date</p>
                                     </td>
                                 </tr>  
