@@ -26,7 +26,7 @@ const LogIn = () => {
             <div className="max-w-lg w-full mx-auto">
 
               <div className="mb-12">
-                <h3 className="text-gray-800 text-4xl font-extrabold">Sign in</h3>
+                <h3 className="text-gray-800 text-4xl font-extrabold">Log In</h3>
                 <div className="text-3xl font-semibold mt-4">We're glad you're back!</div>
                 <p className="text-gray-800 md:text-lg font-medium mt-2">University College Of Business Studies<br/>Library Management System</p>
               </div>
