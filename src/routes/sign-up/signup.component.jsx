@@ -5,7 +5,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { parse, format } from "date-fns";
 
 //toast
-import { toast, ToastContainer } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 import FormInput from "../../components/input-field/input-field.component";
@@ -81,42 +81,19 @@ const SignUp = () => {
       try {
         const result = await CreateAuthUser(selectedUser);
         if (result === "exists") {
-          toast.error("Account already exists", {
-            position: "top-center",
-            autoClose: 3000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-          });
+          toast.error("Account already exists");
         } 
         else if (result === "added") {
-          toast.success("Account sent for approval", {
-            position: "top-center",
-            autoClose: 3000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-          });
+          toast.success("Account sent for approval");
           setselectedUser({...userCreds});
+          document.getElementById("terms").checked = false;
           setErrors({});
         }
         else {
-          toast.error("Error Occurred", {
-            position: "top-center",
-            autoClose: 3000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-          });
+          toast.error("Error Occurred");
         }
       } catch (error) {
-        toast.error("Submission failed", {
-          position: "top-center",
-          autoClose: 3000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-        });
+        toast.error("Submission failed");
       } finally {
         setIsSubmitting(false);
       }
@@ -252,7 +229,6 @@ const SignUp = () => {
               </div>
           </div>
         </div>
-        <ToastContainer/>
       </section>
 
     </>

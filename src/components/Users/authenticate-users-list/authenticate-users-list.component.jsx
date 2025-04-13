@@ -1,7 +1,7 @@
 import { useContext, useState } from 'react';
 import { AuthUserContext } from '../../../context/authenticate-user.context';
 import AuthUser from './auth-user.component';
-import { toast, ToastContainer } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const AuthenticateUsersList = () => {
@@ -18,38 +18,14 @@ const AuthenticateUsersList = () => {
             if (result === "created") {
                 await DeleteAuthUser(Authuser);
                 await refreshAuthUsers()
-                toast.success("User Accepted", {
-                    position: "top-center",
-                    autoClose: 3000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                });
+                toast.success("User Accepted");
             } else if (result === "exists") {
-                toast.error("User Already Exists", {
-                    position: "top-center",
-                    autoClose: 3000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                });
+                toast.error("User Already Exists");
             } else {
-                toast.error("Error Occurred", {
-                    position: "top-center",
-                    autoClose: 3000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                });
+                toast.error("Error Occurred");
             }
         } catch (error) {
-            toast.error("Operation Failed", {
-                position: "top-center",
-                autoClose: 3000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-            });
+            toast.error("Operation Failed");
         } finally {
             setIsProcessing(false);
         }
@@ -64,30 +40,12 @@ const AuthenticateUsersList = () => {
             
             if (result === "Deleted") {
                 await refreshAuthUsers();
-                toast.success("User Rejected", {
-                    position: "top-center",
-                    autoClose: 3000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                });
+                toast.success("User Rejected");
             } else {
-                toast.error("Error Occurred", {
-                    position: "top-center",
-                    autoClose: 3000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                });
+                toast.error("Error Occurred");
             }
         } catch (error) {
-            toast.error("Operation Failed", {
-                position: "top-center",
-                autoClose: 3000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-            });
+            toast.error("Operation Failed");
         } finally {
             setIsProcessing(false);
         }
@@ -171,7 +129,6 @@ const AuthenticateUsersList = () => {
                         }
                     </tbody>
                 </table>
-                <ToastContainer/>
             </div>
         </>
     );

@@ -2,6 +2,9 @@ import FormInput from "../input-field/input-field.component";
 import { UsersContext } from "../../context/users.context";
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
+//toastify
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const SvgComponent1 = (
   <svg xmlns="http://www.w3.org/2000/svg" fill="#bbb" stroke="#bbb" className="w-[18px] h-[18px] absolute right-2" viewBox="0 0 682.667 682.667">
@@ -27,6 +30,7 @@ const UserLogIn = () => {
   const {Users} = useContext(UsersContext);
   const [selectedUser, setselectedUser] = useState({user_id: "", password: ""});
   const {user_id, password} = selectedUser;
+
   const navigate = useNavigate();
   const handleChange = (e) => {
     const {name, value} = e.target;
@@ -37,7 +41,7 @@ const UserLogIn = () => {
     e.preventDefault();
     const User = Users.find((user) => user.user_id.toString() === user_id && user.password.toString() === password);
     if (!User) {
-      alert("Invalid Credentials");
+      toast.error("Invalid User ID or Password");
     } else {
       localStorage.setItem('currentuser', 'true');
       localStorage.setItem('currentuserCreds', user_id);
@@ -51,11 +55,11 @@ const UserLogIn = () => {
       <form className="max-w-lg w-full mx-auto">
 
         <div className="mt-8">
-            <FormInput type="text" placeholder="Enter User ID" onChange={handleChange} label="User ID" name="user_id" value={user_id} id="user_id" svgIcon={SvgComponent1}/>
+            <FormInput type="text" placeholder="Enter User ID" onChange={handleChange} label="User ID" name="user_id" value={user_id} id="user_id" svgicon={SvgComponent1}/>
         </div>
       
         <div className="mt-8">
-            <FormInput type="password" placeholder="Enter Password" onChange={handleChange} label="Password (use format DD/MM/YYYY)" name="password" id="password" value={password} svgIcon={SvgComponent2}/>
+            <FormInput type="password" placeholder="Enter Password" onChange={handleChange} label="Password (use format DD/MM/YYYY)" name="password" id="password" value={password} svgicon={SvgComponent2}/>
         </div>
 
         <div className="mt-8">
@@ -63,8 +67,6 @@ const UserLogIn = () => {
               Log In
             </button>
         </div>
-        {/* <button type="button" onClick={handleLogout}>Log out</button> */}
-      
       </form> 
 
     </>

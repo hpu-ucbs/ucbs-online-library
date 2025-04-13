@@ -50,11 +50,11 @@ const AdminLogIn = () => {
       <form className="max-w-lg w-full mx-auto">
 
         <div className="mt-8">
-            <FormInput type="text" placeholder="Enter Admin ID" onChange={handleChange} label="Admin ID" name="admin_id" id="admin_id" value={admin_id} svgIcon={SvgComponent1}/>
+            <FormInput type="text" placeholder="Enter Admin ID" onChange={handleChange} label="Admin ID" name="admin_id" id="admin_id" value={admin_id} svgicon={SvgComponent1}/>
         </div>
 
         <div className="mt-8">
-            <FormInput type="password" placeholder="Enter Password" onChange={handleChange} label="Password" name="password" id="password" value={password} svgIcon={SvgComponent2}/>
+            <FormInput type="password" placeholder="Enter Password" onChange={handleChange} label="Password" name="password" id="password" value={password} svgicon={SvgComponent2}/>
         </div>
 
         <div className="mt-8">

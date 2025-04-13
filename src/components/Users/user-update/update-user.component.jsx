@@ -1,6 +1,6 @@
 import { useState, useContext, useEffect } from 'react';
 //toast
-import { toast, ToastContainer } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 import { UsersContext } from '../../../context/users.context';
@@ -59,12 +59,12 @@ const UpdateNewUser = () => {
 
     const handleUserAction = async (e, actionType) => {
         e.preventDefault();
-        setIsProcessing(true);
         const validationErrors = validateForm(selectedUser);
         if (Object.keys(validationErrors).length > 0) {
             setErrors(validationErrors);
             return;
         }
+        setIsProcessing(true);
         try {
             let result;
             if (actionType === 'update') {
@@ -222,16 +222,39 @@ const UpdateNewUser = () => {
                         <IssuedBook />
                         {!ibookclick && clickedUser.name && <button className="bg-blue-500 hover:bg-blue-700 text-white py-1 px-2 rounded text-base" onClick={handleBook}>Add Issued Books</button>}
                         {ibookclick && <button className="bg-blue-500 hover:bg-blue-700 text-white py-1 px-2 rounded text-base" onClick={handleBack}>Back</button>}
-                        <ToastContainer />
                     </form>
                 </div>
 
+                {isProcessing && (
+                    <div className="flex items-center gap-2 mb-4 text-blue-600">
+                        <svg
+                        className="animate-spin h-5 w-5 text-blue-600"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        >
+                        <circle
+                            className="opacity-25"
+                            cx="12"
+                            cy="12"
+                            r="10"
+                            stroke="currentColor"
+                            strokeWidth="4"
+                        />
+                        <path
+                            className="opacity-75"
+                            fill="currentColor"
+                            d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"
+                        />
+                        </svg>
+                        Processing...
+                    </div>
+                    )}
                 <div className="mt-6">
                     {ibookclick ? <div></div> :
                     <div className="text-white flex justify-around text-lg font-semibold">
-                    <button className="bg-green-500 px-9 py-2 rounded-xl" onClick={(e) => handleUserAction(e, 'add')}>{isProcessing ? 'Processing...' : 'Create'}</button>
-                    <button className="bg-blue-500 px-9 py-2 rounded-xl" onClick={(e) => handleUserAction(e, 'update')}>{isProcessing ? 'Processing...' : 'Update'}</button>
-                    <button className="bg-red-500 px-9 py-2 rounded-xl" onClick={handleDelete}>{isProcessing ? 'Processing...' : 'Delete'}</button>
+                    <button disabled={isProcessing} className="bg-green-500 px-9 py-2 rounded-xl" onClick={(e) => handleUserAction(e, 'add')}>Create</button>
+                    <button disabled={isProcessing} className="bg-blue-500 px-9 py-2 rounded-xl" onClick={(e) => handleUserAction(e, 'update')}>Update</button>
+                    <button disabled={isProcessing} className="bg-red-500 px-9 py-2 rounded-xl" onClick={handleDelete}>Dalete</button>
                     </div>}
                 </div>
             </div>

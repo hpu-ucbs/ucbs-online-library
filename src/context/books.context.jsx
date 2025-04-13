@@ -1,5 +1,7 @@
-import { createContext, useState, useEffect, useCallback } from "react";
+import { createContext, useState, useEffect, useCallback, useContext } from "react";
 import { listBooks, deleteBook, getBook, createBook, updateBook } from '../lib/book.appwrite';
+import { UsersContext } from "./users.context";
+import { getUser, updateUser } from "../lib/user.appwrite";
 
 export const BooksContext = createContext({
     Books: null,
@@ -11,12 +13,13 @@ export const BooksContext = createContext({
     clickedBook: {},
     setclickedBook: () => null,
     refreshBooks: () => null,
+    assignBookToUser: () => null,
 });
 
 export const BooksProvider = ({ children }) => {
     const [Books, setBooks] = useState([]);
     const [clickedBook, setclickedBook] = useState({});
-
+    const { refreshUsers } = useContext(UsersContext);
     const refreshBooks = useCallback(async () => {
         try {
             const result = await listBooks();
@@ -79,6 +82,26 @@ export const BooksProvider = ({ children }) => {
         }
     };
 
+    const assignBookToUser = async (bookId, userId) => {
+        try {
+          const book = await getBook(bookId);
+          const user = await getUser(userId);
+          
+          if (!book || !user) {
+            throw new Error("Book or User not found");
+          }
+          const updatedBooks = user.book ? [...user.book, book] : [book];
+          const updatedUser = { ...user, book: updatedBooks };
+          
+          await updateUser(updatedUser);
+          await refreshUsers();
+          return "assigned";
+        } catch (error) {
+          console.error("Assignment error:", error);
+          return "error";
+        }
+      };
+
     const value = {
         Books,
         setBooks,
@@ -88,7 +111,8 @@ export const BooksProvider = ({ children }) => {
         updateThisBook,
         clickedBook,
         setclickedBook,
-        refreshBooks
+        refreshBooks,
+        assignBookToUser
     };
 
     return <BooksContext.Provider value={value}>{children}</BooksContext.Provider>;
