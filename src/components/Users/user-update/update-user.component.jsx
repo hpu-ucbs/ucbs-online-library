@@ -8,9 +8,10 @@ import FormInput from '../../input-field/input-field.component';
 import IssuedBook from "../../issued-books/issued-books.component";
 
 const UpdateNewUser = () => {
-    const { updateThisUser, deleteThisUser, createThisUser, clickedUser, setibookclick } = useContext(UsersContext);
+    const { updateThisUser, deleteThisUser, createThisUser, clickedUser, setibookclick, ibookclick, refreshUsers } = useContext(UsersContext);
     const [selectedUser, setselectedUser] = useState({});
     const [errors, setErrors] = useState({});
+    const [isProcessing, setIsProcessing] = useState(false);
 
     useEffect(() => {
         setselectedUser(clickedUser);
@@ -45,62 +46,74 @@ const UpdateNewUser = () => {
             newErrors.password = "Pass must be exactly 10 characters";
         }
 
-        if (!user.course || (user.course !== "bca" && user.course !== "bba")) {
+        if (!user.course || (user.course !== "BCA" && user.course !== "BBA")) {
             newErrors.course = "Course must be either BCA or BBA";
         }
 
-        if (!user.year || (user.year !== "1" && user.year !== "2" && user.year !== "3")) {
+        if (!user.year || (user.year !== "1" && user.year !== "2" && user.year !== "3" && user.year !== 1 && user.year !== 2 && user.year !== 3)) {
             newErrors.year = "Year must be 1, 2, or 3";
         }
 
         return newErrors;
     };
 
-    const handleUserAction = (e, actionType) => {
+    const handleUserAction = async (e, actionType) => {
         e.preventDefault();
+        setIsProcessing(true);
         const validationErrors = validateForm(selectedUser);
         if (Object.keys(validationErrors).length > 0) {
             setErrors(validationErrors);
-        } else {
+            return;
+        }
+        try {
+            let result;
             if (actionType === 'update') {
-                updateThisUser(selectedUser);
-                toast.info("User Updated",{
-                    position: "top-center",
-                    autoClose: 3000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                })
+                result = await updateThisUser(selectedUser);
             } else if (actionType === 'add') {
-                createThisUser(selectedUser);
-                toast.info("User Added",{
-                    position: "top-center",
-                    autoClose: 3000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                })
+                result = await createThisUser(selectedUser);
             }
+
+            if (result === "updated" || result === "created") {
+                toast.success(`User ${actionType === 'update' ? 'Updated' : 'Created'}`);
+                await refreshUsers();
+            } else if (result === "exists") {
+                toast.error("Account already exists");
+            } else {
+                toast.error("Error Occurred");
+            }
+        } catch (error) {
+            toast.error("Operation failed");
+        } finally {
+            setIsProcessing(false);
+            setselectedUser({});
             setErrors({});
         }
     };
 
-    const handleDelete = (e) => {
+    const handleDelete = async (e) => {
         e.preventDefault();
-        deleteThisUser(selectedUser);
-        toast.info("User Deleted",{
-            position: "top-center",
-            autoClose: 3000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-        })
+        setIsProcessing(true);
+        try {
+            await deleteThisUser(selectedUser);
+            toast.info("User Deleted");
+            await refreshUsers();
+        } catch (error) {
+            toast.error("Error Occurred");
+        } finally {
+            setselectedUser({});
+            setIsProcessing(false);
+            setErrors({});
+        }
     };
 
     const handleBook = (e) => {
         e.preventDefault();
         setibookclick(true);
     };
+    const handleBack = (e) => {
+        e.preventDefault();
+        setibookclick(false);
+    }
 
     return (
         <>
@@ -147,8 +160,8 @@ const UpdateNewUser = () => {
                                     onChange={handleChange}
                                 >
                                     <option value="">Select</option>
-                                    <option value="bca">BCA</option>
-                                    <option value="bba">BBA</option>
+                                    <option value="BCA">BCA</option>
+                                    <option value="BBA">BBA</option>
                                 </select>
                                 {errors.course && (
                                     <div className="absolute -top-8 left-0 bg-red-500 text-white text-xs font-medium px-2 py-1 rounded-md shadow-lg z-10">
@@ -206,17 +219,19 @@ const UpdateNewUser = () => {
                             </div>
                         </div>
                         <IssuedBook />
-                        {clickedUser.name && <button onClick={handleBook}>Books</button>}
+                        {!ibookclick && clickedUser.name && <button className="bg-blue-500 hover:bg-blue-700 text-white py-1 px-2 rounded text-base" onClick={handleBook}>Add Issued Books</button>}
+                        {ibookclick && <button className="bg-blue-500 hover:bg-blue-700 text-white py-1 px-2 rounded text-base" onClick={handleBack}>Back</button>}
                         <ToastContainer />
                     </form>
                 </div>
 
                 <div className="mt-6">
+                    {ibookclick ? <div></div> :
                     <div className="text-white flex justify-around text-lg font-semibold">
-                        <button className="bg-green-500 px-9 py-2 rounded-xl" onClick={(e) => handleUserAction(e, 'add')}>Add</button>
-                        <button className="bg-blue-500 px-9 py-2 rounded-xl" onClick={(e) => handleUserAction(e, 'update')}>Submit</button>
-                        <button className="bg-red-500 px-9 py-2 rounded-xl" onClick={handleDelete}>Delete</button>
-                    </div>
+                    <button className="bg-green-500 px-9 py-2 rounded-xl" onClick={(e) => handleUserAction(e, 'add')}>{isProcessing ? 'Processing...' : 'Create'}</button>
+                    <button className="bg-blue-500 px-9 py-2 rounded-xl" onClick={(e) => handleUserAction(e, 'update')}>{isProcessing ? 'Processing...' : 'Update'}</button>
+                    <button className="bg-red-500 px-9 py-2 rounded-xl" onClick={handleDelete}>{isProcessing ? 'Processing...' : 'Delete'}</button>
+                    </div>}
                 </div>
             </div>
         </>

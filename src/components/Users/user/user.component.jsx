@@ -3,7 +3,7 @@ import {UsersContext} from "../../../context/users.context";
 const User = ({user_item}) => {
     const {setclickedUser} = useContext(UsersContext);
     const { name, roll_no, course, year, user_id, fine, book} = user_item;
-    const book_count = book.length
+    const book_count = book ? book.length : 0;
     const handleClick = () => {
         setclickedUser(user_item);
     }

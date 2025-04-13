@@ -1,7 +1,7 @@
 import { databases } from "./appwrite";
 
-const database_id = '66431d5a00229c5bbd1f';
-const collection_id = '6695d2d50008da86f1e0';
+const database_id = '67fabdd40004716ba175';
+const collection_id = '67fac3db002695adc8d1';
 
 export const listAdmins = async () => {
     const result = await databases.listDocuments(

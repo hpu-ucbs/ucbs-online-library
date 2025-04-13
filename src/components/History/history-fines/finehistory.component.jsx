@@ -18,14 +18,17 @@ const FineHistory = () => {
                 <p className="font-bold w-1/4 text-center">Fine Paid On</p>
             </div>
             {usersHistory && usersHistory.sort((a, b) => new Date(b.fine_alloted_on) - new Date(a.fine_alloted_on)).map((item) => {
-                return (
-                    <div key={item.$id} className="flex justify-evenly items-center border border-gray-300 rounded-md w-3/4 m-auto mb-4 p-4 bg-white shadow-md transition-transform duration-200 transform hover:scale-105">
-                        <p className="w-1/4 text-center">{item.user.name}</p>
-                        <p className="w-1/4 text-center">{item.amount ? item.amount : 0}</p>
-                        <p className="w-1/4 text-center">{new Date(item.fine_alloted_on).toLocaleDateString()}</p>
-                        <p className="w-1/4 text-center">{item.fine_paid_on ? new Date(item.fine_paid_on).toLocaleDateString() : 'Not Paid'}</p>
-                    </div>
-                )
+                if (item.user){
+                    return (
+                        <div key={item.$id} className="flex justify-evenly items-center border border-gray-300 rounded-md w-3/4 m-auto mb-4 p-4 bg-white shadow-md transition-transform duration-200 transform hover:scale-105">
+                            <p className="w-1/4 text-center">{item.user.name}</p>
+                            <p className="w-1/4 text-center">{item.amount ? item.amount : 0}</p>
+                            <p className="w-1/4 text-center">{new Date(item.fine_alloted_on).toLocaleDateString()}</p>
+                            <p className="w-1/4 text-center">{item.fine_paid_on ? new Date(item.fine_paid_on).toLocaleDateString() : 'Not Paid'}</p>
+                        </div>
+                    )
+                } else return null;
+                
             })}
         </div>
     )
