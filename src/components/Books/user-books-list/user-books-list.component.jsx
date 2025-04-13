@@ -12,7 +12,7 @@ const UserBooksList = () => {
 
   const handleChange = ({ target: { value } }) => setuserSearch(value);
   const handleCourse = ({target: {value}}) => setcourse(value);
-  const filteredList = Books && Books.filter(book => book.title.toLowerCase().includes(userSearch.toLowerCase())).filter(book => book.course.toLowerCase().includes(course.toLowerCase()));
+  const filteredList = Books && Books.filter(book => book.title.toLowerCase().includes(userSearch.toLowerCase()));
 
   return(
     <>

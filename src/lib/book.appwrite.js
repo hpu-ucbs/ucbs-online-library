@@ -2,8 +2,8 @@ import { ID, Query } from "appwrite";
 import { databases } from "./appwrite";
 import { createBooksHistory } from './bookshistory.appwrite';
 
-const database_id = '66431d5a00229c5bbd1f';
-const collection_id = '66431da200196276fb0f';
+const database_id = '67fabdd40004716ba175';
+const collection_id = '67fac22100268ffd9567';
 
 export const createBook = async (book) => {
     let { s_no, book_no, image_URL, author, title, edition, year, pages, stock, course, description } = book;
@@ -38,7 +38,7 @@ export const listBooks = async () => {
     const result = await databases.listDocuments(
         database_id,
         collection_id,
-        [Query.limit(5000)]
+        [Query.limit(15)]
     );
     return result;
 }

@@ -1,11 +1,11 @@
 import { ID, Query } from "appwrite";
 import { databases } from "./appwrite";
 
-const database_id = '66431d5a00229c5bbd1f';
-const collection_id = '66431dad000f2a73cc5d';
+const database_id = '67fabdd40004716ba175';
+const collection_id = '67fac077001d4315dfa3';
 
 export const createUser = async (user) => {
-    let { user_id, password, name, roll_no, course, year, email } = user;
+    let { user_id, password, name, roll_no, course, year } = user;
     user_id = parseInt(user_id);
     roll_no = parseInt(roll_no);
     year = parseInt(year);
@@ -20,7 +20,6 @@ export const createUser = async (user) => {
             roll_no,
             course,
             year,
-            email,
         }
     );
     return result;
@@ -30,7 +29,7 @@ export const listUsers = async () => {
     const result = await databases.listDocuments(
         database_id,
         collection_id,
-        [Query.limit(5000)]
+        [Query.limit(15)]
     );
     return result;
 }

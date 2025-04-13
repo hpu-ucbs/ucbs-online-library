@@ -12,7 +12,7 @@ const BooksList = () => {
 
   const handleChange = ({ target: { value } }) => setuserSearch(value);
   const handleCourse = ({target: {value}}) => setcourse(value);
-  const filteredList = Books && Books.filter(book => book.title.toLowerCase().includes(userSearch.toLowerCase())).filter(book => book.course.toLowerCase().includes(course.toLowerCase()));
+  const filteredList = Books && Books.filter(book => book.title.toLowerCase().includes(userSearch.toLowerCase()));
 
   return(
     <>
@@ -108,7 +108,7 @@ const BooksList = () => {
                 <div className="px-[2rem] md:px-0 lg:px-[2rem]">
                     <div >
                         <div className="bg-[#F0F0F0] w-full grid grid-cols-1 gap-4 overflow-y-auto rounded-b-2xl p-5 h-[45rem]">
-                            {filteredList && filteredList.sort((a, b) => a.title.localeCompare(b.title)).map(book => <Book key={book.s_no} book_item={book} />)}
+                            {filteredList && filteredList.sort((a, b) => a.title.localeCompare(b.title)).map(book => <Book key={book.$id} book_item={book} />)}
                         </div>
                     </div>
                 </div>

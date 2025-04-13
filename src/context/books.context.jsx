@@ -1,7 +1,7 @@
-import { createContext, useState, useEffect } from "react";
+import { createContext, useState, useEffect, useCallback } from "react";
 import { listBooks, deleteBook, getBook, createBook, updateBook } from '../lib/book.appwrite';
 
-export const BooksContext = createContext ({
+export const BooksContext = createContext({
     Books: null,
     setBooks: () => null,
     getThisBook: () => null,
@@ -10,69 +10,86 @@ export const BooksContext = createContext ({
     updateThisBook: () => null,
     clickedBook: {},
     setclickedBook: () => null,
-})
+    refreshBooks: () => null,
+});
 
-const CreateBook = (book, Books) => {
-  if (!book){
-    return console.log("no book");
-  }
-  let exist = false;
-  Books.map((curBook) => {
-    if (curBook.title === book.title || parseInt(curBook.s_no) === book.s_no) {
-      exist = true;
-    }
-    return [];
-  });
-
-  if (exist === true){
-    return alert("book already exist");
-  } else{
-    try{
-        createBook(book);
-        alert("Book created successfully");
-    } catch(error){
-        console.log(error);
-    }
-  }
-}
-
-const DeleteBook = (book) => {
-  deleteBook(book.$id);
-  alert("Book deleted successfully");
-}
-
-const UpdateBook = (book) => {
-  updateBook(book);
-  alert("Book updated successfully");
-}
-
-const GetBook = (book, setclickedBook) => {
-  const result = getBook(book.$id);
-  result.then(result => setclickedBook(result));
-}
-
-export const BooksProvider = ({children}) => {
-    const [Books, setBooks] = useState();
+export const BooksProvider = ({ children }) => {
+    const [Books, setBooks] = useState([]);
     const [clickedBook, setclickedBook] = useState({});
-    useEffect(()=>{
-      listBooks().then(result => setBooks(result.documents));
+
+    const refreshBooks = useCallback(async () => {
+        try {
+            const result = await listBooks();
+            setBooks(result.documents);
+        } catch (error) {
+            console.error("Failed to refresh books:", error);
+        }
     }, []);
 
-    const createThisBook = (book) => {
-        CreateBook(book, Books);
-    }
+    useEffect(() => {
+        refreshBooks();
+    }, [refreshBooks]);
 
-    const deleteThisBook = (book) => {
-        DeleteBook(book);
-    }
-    const updateThisBook = (book) => {
-        UpdateBook(book);
-    }
-    const getThisBook = (book) => {
-        GetBook(book, setclickedBook);
-    }
+    const createThisBook = async (book) => {
+        try {
+            const currentBooks = await listBooks();
+            const exists = currentBooks.documents.some(
+                b => b.title === book.title || parseInt(b.s_no) === book.s_no
+            );
+            
+            if (exists) return "exists";
+            
+            await createBook(book);
+            await refreshBooks();
+            return "created";
+        } catch (error) {
+            console.error("Create book error:", error);
+            return "error";
+        }
+    };
 
-    const value = {Books, setBooks, getThisBook, createThisBook, deleteThisBook, updateThisBook, clickedBook, setclickedBook};
+    const deleteThisBook = async (book) => {
+        try {
+            await deleteBook(book.$id);
+            await refreshBooks();
+            return "deleted";
+        } catch (error) {
+            console.error("Delete book error:", error);
+            return "error";
+        }
+    };
 
-    return <BooksContext.Provider value={value}>{children}</BooksContext.Provider>
-}
+    const updateThisBook = async (book) => {
+        try {
+            await updateBook(book);
+            await refreshBooks();
+            return "updated";
+        } catch (error) {
+            console.error("Update book error:", error);
+            return "error";
+        }
+    };
+
+    const getThisBook = async (book) => {
+        try {
+            const result = await getBook(book.$id);
+            setclickedBook(result);
+        } catch (error) {
+            console.error("Get book error:", error);
+        }
+    };
+
+    const value = {
+        Books,
+        setBooks,
+        getThisBook,
+        createThisBook,
+        deleteThisBook,
+        updateThisBook,
+        clickedBook,
+        setclickedBook,
+        refreshBooks
+    };
+
+    return <BooksContext.Provider value={value}>{children}</BooksContext.Provider>;
+};

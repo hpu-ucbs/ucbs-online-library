@@ -1,8 +1,8 @@
 import { ID, Query } from "appwrite";
 import { databases } from "./appwrite";
 
-const database_id = '66431d5a00229c5bbd1f';
-const collection_id = '66855041001f550300d9';
+const database_id = '67fabdd40004716ba175';
+const collection_id = '67fac4f50016c248246c';
 
 export const createUBHistory = async (userid, IB) => {
     const currentDate = new Date();
@@ -24,7 +24,7 @@ export const listUBHistory = async () => {
     const result = await databases.listDocuments(
         database_id,
         collection_id,
-        [Query.limit(5000)]
+        [Query.limit(15)]
     );
     return result;
 }
@@ -49,6 +49,5 @@ export const updateUBHistory = async (id) => {
             return_date: curDate
         }
     );
-    alert("User History updated successfully");
     return result;
 }

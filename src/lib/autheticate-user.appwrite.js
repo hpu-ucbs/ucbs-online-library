@@ -1,8 +1,8 @@
 import { ID, Query } from "appwrite";
 import { databases } from "./appwrite";
 
-const database_id = '66431d5a00229c5bbd1f';
-const collection_id = '67f8ded40026b2273e0e';
+const database_id = '67fabdd40004716ba175';
+const collection_id = '67fabe3400007379401a';
 
 export const createAuthUser = async (authUser) => {
     let { user_id, password, name, roll_no, course, year, email } = authUser;
@@ -14,7 +14,7 @@ export const createAuthUser = async (authUser) => {
         collection_id,
         ID.unique(),
         {
-            user_id,
+            user_id,    
             password,
             name,
             roll_no,
@@ -39,7 +39,7 @@ export const listAuthUser = async () => {
     const result = await databases.listDocuments(
         database_id,
         collection_id,
-        [Query.limit(5000)]
+        [Query.limit(15)]
     );
     return result;
 }
