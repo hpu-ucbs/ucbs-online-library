@@ -1,5 +1,8 @@
 import { useState, useContext } from "react";
 import { Link } from "react-router-dom";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import { parse, format } from "date-fns";
 
 //toast
 import { toast, ToastContainer } from 'react-toastify';
@@ -115,6 +118,10 @@ const SignUp = () => {
       }
     }
   };
+  
+  const dobDate = selectedUser.password
+  ? parse(selectedUser.password, "dd/MM/yyyy", new Date())
+  : null;
 
   return (
     <>
@@ -174,7 +181,29 @@ const SignUp = () => {
                       </div>
                       <div className="flex justify-between items-center">
                         <div>
-                          <FormInput value={selectedUser.password || ""} error={errors.password} onChange={handleChange} label={"Enter Date of Birth"} type="date" name="password" id="password" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-36 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required=""/>
+                        <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Enter Date of Birth</label>
+                        <DatePicker
+                            selected={dobDate}
+                            onChange={(date) =>
+                              handleChange({
+                                target: {
+                                  name: "password", // ideally rename this to "dob"
+                                  value: format(date, "dd/MM/yyyy"),
+                                },
+                              })
+                            }
+                            dateFormat="dd/MM/yyyy"
+                            placeholderText="DD/MM/YYYY"
+                            maxDate={new Date()}
+                            showYearDropdown
+                            scrollableYearDropdown
+                            yearDropdownItemNumber={100}
+                            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-36 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                          />
+                          {errors.password && (
+                            <p className="text-red-500 text-sm mt-1">{errors.password}</p>
+                          )}
+                          {/* <FormInput value={selectedUser.password || ""} error={errors.password} onChange={handleChange} label={"Enter Date of Birth"} type="date" name="password" id="password" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-36 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required=""/> */}
                         </div>
                         <div>
                           <label htmlFor="year" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Enter Course Year</label>
