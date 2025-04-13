@@ -9,48 +9,11 @@ const IssuedBooks = () => {
   const { updateThisUser, clickedUser, setclickedUser } = useContext(UsersContext);
   const { clickedBook, setclickedBook } = useContext(BooksContext);
   const [books, setBooks] = useState(clickedUser?.book || []);
-
   useEffect(() => {
     if (clickedUser?.book) {
       setBooks([...clickedUser.book]);
     }
   }, [clickedUser]);
-
-  useEffect(() => {
-    if (clickedBook && clickedUser?.book && clickedBook.s_no) {
-      const existingBook = clickedUser.book.find((b) => b.s_no === clickedBook.s_no);
-      if (!existingBook) {
-        const updatedBooks = [...clickedUser.book, clickedBook];
-        const updatedUser = { ...clickedUser, book: updatedBooks };
-        const result = updateThisUser(updatedUser);
-        if (result === "updated") {
-          toast.success("Book Issued Successfully",{
-            position: "top-center",
-            autoClose: 3000,
-            hideProgressBar: false,
-            pauseOnHover: true,
-          });
-        } else {
-          toast.error("Error issuing book",{
-            position: "top-center",
-            autoClose: 3000,
-            hideProgressBar: false,
-            pauseOnHover: true,
-          });
-        }
-        setclickedUser(updatedUser);
-        clickedBook.$id && createUBHistory(clickedUser.$id, clickedBook.$id);
-      } else {
-        toast.error("Book already issued",{
-          position: "top-center",
-          autoClose: 3000,
-          hideProgressBar: false,
-          pauseOnHover: true,
-        });
-      }
-      setclickedBook(null);
-    }
-  }, [clickedBook, clickedUser, updateThisUser, setclickedUser, setclickedBook]);
 
   const getHistoryId = async (user_rno, book_sno) => {
     try {
