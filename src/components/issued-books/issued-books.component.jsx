@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState, useRef } from "react";
+import { useContext, useEffect, useState, useRef, useCallback, useMemo } from "react";
 import { UsersContext } from "../../context/users.context";
 import { BooksContext } from "../../context/books.context";
 import { createUBHistory, listUBHistory, updateUBHistory } from "../../lib/usershistory.appwrite";
@@ -9,24 +9,10 @@ const IssuedBooks = () => {
   const { updateThisUser, clickedUser, setclickedUser, refreshUsers } = useContext(UsersContext);
   const { clickedBook, setclickedBook, assignBookToUser } = useContext(BooksContext);
   const [isProcessing, setisProcessing] = useState(false);
-  const books = clickedUser?.book || [];
-  const isFirstRender = useRef(true); 
+  const books = useMemo(() => clickedUser?.book || [], [clickedUser]);
+  const isFirstRender = useRef(true);
 
-  useEffect(() => {
-    if (isFirstRender.current) {
-      isFirstRender.current = false;
-      return;
-    }
-    const userIsValid = clickedUser && Object.keys(clickedUser).length > 0;
-    const bookIsValid = clickedBook && Object.keys(clickedBook).length > 0;
-
-    if (userIsValid && bookIsValid) {
-      handleAssignBook(clickedBook);
-      setclickedBook(null);
-    }
-  }, [clickedBook]);
-
-  const handleAssignBook = async (book) => {
+  const handleAssignBook = useCallback(async (book) => {
     if (isProcessing) return;
     if (books.some(b => b.$id === book.$id)) {
       toast.warning("Book already assigned to this user");
@@ -52,7 +38,21 @@ const IssuedBooks = () => {
     } finally {
       setisProcessing(false);
     }
-  };
+  }, [isProcessing, books, assignBookToUser, clickedUser, setclickedUser, refreshUsers, setclickedBook]);
+
+  useEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
+    }
+    const userIsValid = clickedUser && Object.keys(clickedUser).length > 0;
+    const bookIsValid = clickedBook && Object.keys(clickedBook).length > 0;
+
+    if (userIsValid && bookIsValid) {
+      handleAssignBook(clickedBook);
+      setclickedBook(null);
+    }
+  }, [clickedBook, clickedUser, handleAssignBook, setclickedBook]);
 
   const getHistoryId = async (user_rno, book_sno) => {
     try {
