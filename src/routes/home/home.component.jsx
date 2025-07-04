@@ -103,7 +103,7 @@ const toggleMenu = () => setMenuOpen(!menuOpen);
         
 
         {/* <!-- book search & filter --> */}
-        <section>
+        {/* <section>
         <div className="py-[64px]">
           <div className="px-[64px]">
             <div className="flex flex-col justify-center items-center gap-4 w-full">
@@ -137,7 +137,7 @@ const toggleMenu = () => setMenuOpen(!menuOpen);
           </div>
         </div>
 
-        </section>
+        </section> */}
 
         {/* <!-- academic block --> */}
         <section className="bg-gradient-to-t from-[#D78615] to-[#FBE194] ">
