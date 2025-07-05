@@ -1,4 +1,4 @@
-import { createContext, useState, useEffect, useCallback } from "react";
+import { createContext, useState, useEffect, useCallback, useRef } from "react";
 import { listUsers, deleteUser, getUser, createUser, updateUser } from '../lib/user.appwrite';
 
 export const UsersContext = createContext({
@@ -18,18 +18,42 @@ export const UsersProvider = ({ children }) => {
     const [Users, setUsers] = useState([]);
     const [clickedUser, setclickedUser] = useState({});
     const [ibookclick, setibookclick] = useState(false);
+    const [loading, setLoading] = useState(false);
+    const lastFetchTime = useRef(0);
+    const CACHE_DURATION = 30000; // 30 seconds cache
+    const isInitialized = useRef(false);
     
-    const refreshUsers = useCallback(async () => {
+    const refreshUsers = useCallback(async (force = false) => {
+        const now = Date.now();
+        
+        // Prevent excessive API calls with caching
+        if (!force && now - lastFetchTime.current < CACHE_DURATION) {
+            return;
+        }
+        
+        // Prevent concurrent requests
+        if (loading) {
+            return;
+        }
+        
+        setLoading(true);
         try {
             const result = await listUsers();
             setUsers(result.documents);
+            lastFetchTime.current = now;
         } catch (error) {
             console.error("Failed to refresh users:", error);
+        } finally {
+            setLoading(false);
         }
-    }, []);
+    }, [loading]);
 
+    // Only fetch on mount, not on every refreshUsers change
     useEffect(() => {
-        refreshUsers();
+        if (!isInitialized.current) {
+            isInitialized.current = true;
+            refreshUsers(true);
+        }
     }, [refreshUsers]);
 
     const createThisUser = async (User) => {
@@ -42,7 +66,7 @@ export const UsersProvider = ({ children }) => {
             if (exists) return "exists";
             
             await createUser(User);
-            await refreshUsers();
+            await refreshUsers(true); // Force refresh after creation
             return "created";
         } catch (error) {
             console.error("Create user error:", error);
@@ -53,7 +77,7 @@ export const UsersProvider = ({ children }) => {
     const deleteThisUser = async (User) => {
         try {
             await deleteUser(User.$id);
-            await refreshUsers();
+            await refreshUsers(true); // Force refresh after deletion
             return "deleted";
         } catch (error) {
             console.error("Delete user error:", error);
@@ -64,7 +88,7 @@ export const UsersProvider = ({ children }) => {
     const updateThisUser = async (User) => {
         try {
             await updateUser(User);
-            await refreshUsers();
+            await refreshUsers(true); // Force refresh after update
             return "updated";
         } catch (error) {
             console.error("Update user error:", error);
@@ -72,9 +96,9 @@ export const UsersProvider = ({ children }) => {
         }
     };
 
-    const getThisUser = (User) => {
+    const getThisUser = useCallback((User) => {
         getUser(User.$id).then(result => setclickedUser(result));
-    };
+    }, []);
 
     const value = {
         Users,
