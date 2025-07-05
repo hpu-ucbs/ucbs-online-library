@@ -1,4 +1,4 @@
-import { createContext, useState, useEffect, useContext, useCallback } from "react";
+import { createContext, useState, useEffect, useContext, useCallback, useRef } from "react";
 import { UsersContext } from './users.context';
 import { listAuthUser, createAuthUser, deleteAuthUser } from '../lib/autheticate-user.appwrite';
 
@@ -13,21 +13,44 @@ export const AuthUserContext = createContext({
 
 export const AuthUserProvider = ({ children }) => {
     const [AuthUsers, setAuthUsers] = useState([]);
+    const [loading, setLoading] = useState(false);
+    const lastFetchTime = useRef(0);
+    const CACHE_DURATION = 30000; // 30 seconds cache
+    const isInitialized = useRef(false);
+    
     const { createThisUser } = useContext(UsersContext);
 
-    // Add refresh function
-    const refreshAuthUsers = useCallback(async () => {
+    const refreshAuthUsers = useCallback(async (force = false) => {
+        const now = Date.now();
+        
+        // Prevent excessive API calls with caching
+        if (!force && now - lastFetchTime.current < CACHE_DURATION) {
+            return;
+        }
+        
+        // Prevent concurrent requests
+        if (loading) {
+            return;
+        }
+        
+        setLoading(true);
         try {
             const result = await listAuthUser();
             setAuthUsers(result.documents);
+            lastFetchTime.current = now;
         } catch (error) {
             console.error("Failed to refresh auth users:", error);
+        } finally {
+            setLoading(false);
         }
-    }, []);
+    }, [loading]);
 
-    // Load initial data
+    // Only fetch on mount, not on every refreshAuthUsers change
     useEffect(() => {
-        refreshAuthUsers();
+        if (!isInitialized.current) {
+            isInitialized.current = true;
+            refreshAuthUsers(true);
+        }
     }, [refreshAuthUsers]);
 
     const CreateAuthUser = async (AuthUser) => {
@@ -46,7 +69,7 @@ export const AuthUserProvider = ({ children }) => {
             await createAuthUser(AuthUser);
             
             // Update local state with fresh data
-            await refreshAuthUsers();
+            await refreshAuthUsers(true); // Force refresh
             
             return "added";
         } catch (error) {
@@ -71,7 +94,7 @@ export const AuthUserProvider = ({ children }) => {
             await deleteAuthUser(AuthUser.$id);
             
             // Update local state
-            await refreshAuthUsers();
+            await refreshAuthUsers(true); // Force refresh
             
             return "Deleted";
         } catch (error) {
@@ -80,10 +103,10 @@ export const AuthUserProvider = ({ children }) => {
         }
     };
 
-    const AcceptAuthUser = async (AuthUser) => {
+    const AcceptAuthUser = useCallback(async (AuthUser) => {
         if (!AuthUser) return "NoUser";
         return createThisUser(AuthUser);
-    };
+    }, [createThisUser]);
 
     const value = {
         AuthUsers,
@@ -91,7 +114,7 @@ export const AuthUserProvider = ({ children }) => {
         CreateAuthUser,
         AcceptAuthUser,
         DeleteAuthUser,
-        refreshAuthUsers // Expose refresh function
+        refreshAuthUsers
     };
 
     return <AuthUserContext.Provider value={value}>{children}</AuthUserContext.Provider>;
