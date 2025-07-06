@@ -131,9 +131,11 @@ const UserNotifications = () => {
                                 </thead>
                                 <tbody>
                                     {sortedUserHistory.length > 0 ? (
-                                        sortedUserHistory.map((history) => (
+                                        sortedUserHistory.map((history) => {
+                                            return(
                                             <UBHistory key={history.$id} history={history} />
-                                        ))
+                                        )
+                                        })
                                     ) : (
                                         <tr>
                                             <td colSpan="4" className="px-6 py-4 text-center text-gray-500">
