@@ -62,9 +62,7 @@ const IssuedBooks = () => {
       });
       
       if (history?.$id) {
-        const hresult = await updateUBHistory(history.$id, {
-          return_date: new Date().toISOString()
-        });
+        const hresult = await updateUBHistory(history.$id);
         return hresult ? "updated" : "error";
       }
       return "not_found";
