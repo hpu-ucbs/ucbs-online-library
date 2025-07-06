@@ -24,7 +24,7 @@ export const listUBHistory = async () => {
     const result = await databases.listDocuments(
         database_id,
         collection_id,
-        [Query.limit(15)]
+        [Query.limit(1000)]
     );
     return result;
 }

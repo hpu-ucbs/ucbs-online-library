@@ -42,7 +42,6 @@ export const listBooks = async () => {
             Query.limit(150)
         ]
     );
-    console.log("Result", result);
     return result;
 }
 
