@@ -25,10 +25,10 @@ const toggleMenu = () => setMenuOpen(!menuOpen);
               
               <nav className="bg-transparent bg-opacity-20 fixed w-full z-20 top-0 start-0">
                 <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-8">
-                <a href="https://ucbs-online-library.vercel.app/" target="_blank" rel="noreferrer" className="flex items-center space-x-3 rtl:space-x-reverse bg-white/30 backdrop-blur-md border border-white/20 rounded-3xl py-1 px-4">
+                <Link to="/" className="flex items-center space-x-3 rtl:space-x-reverse bg-white/30 backdrop-blur-md border border-white/20 rounded-3xl py-1 px-4">
                   <LibLogo className="h-11 w-11" alt="UCBS Library Management System Logo"/>
                   <span className="self-center text-2xl font-semibold whitespace-nowrap text-white">UCBS Library</span>
-                </a>
+                </Link>
                 <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
                   <Link to="/signup" className="hidden md:block text-white bg-[#C21717] hover:bg-[#c21717e5] focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-8 py-2 text-center mr-4">Sign Up </Link>
                   <Link to="/login" className="hidden md:block text-white bg-[#C21717] hover:bg-[#c21717e5] focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-8 py-2 text-center">Log In</Link>
@@ -191,104 +191,104 @@ const toggleMenu = () => setMenuOpen(!menuOpen);
               <div className="w-full inline-flex flex-nowrap overflow-hidden [mask-image:_linear-gradient(to_right,transparent_0,_black_8rem,_black_calc(100%-12.5rem),transparent_100%)]">
                 <ul className="flex items-center justify-center md:justify-start [&_li]:mx-8 [&_img]:max-w-none animate-scroll">
                   <li>         
-                    <a href="https://www.g20.org/en/">
+                    <a href="https://www.g20.org/en/" target="_blank" rel="noreferrer">
                       <img className="w-[9rem] md:w-[14rem] h-auto" src="https://www.hpuniv.ac.in/img/g20.png" alt="G20" />
                     </a>
                   </li>
                   <li>
-                    <a href="https://email.gov.in/">
+                    <a href="https://email.gov.in/" target="_blank" rel="noreferrer">
                       <img className="w-[9rem] md:w-[14rem] h-auto" src="https://www.hpuniv.ac.in/images/gov.jpg" alt="gov" />
                     </a>
                   </li>
                   <li>
-                    <a href="https://himachal.nic.in/en-IN/" >
+                    <a href="https://himachal.nic.in/en-IN/" target="_blank" rel="noreferrer">
                       <img className="w-[9rem] md:w-[14rem] h-auto" src="https://www.hpuniv.ac.in/images-html/hpgovernment.jpg" alt="hp government" />
                     </a>
                   </li>
                   <li>
-                    <a href="https://www.india.gov.in/" >
+                    <a href="https://www.india.gov.in/" target="_blank" rel="noreferrer">
                       <img className="w-[9rem] md:w-[14rem] h-auto" src="https://www.hpuniv.ac.in/images/gov.jpg" alt="gov india" />
                     </a>
                   </li>
                   <li>
-                    <a href="https://mhrd.gov.in/" >
+                    <a href="https://mhrd.gov.in/" target="_blank" rel="noreferrer">
                       <img className="w-[9rem] md:w-[14rem] h-auto" src="https://www.hpuniv.ac.in/images-html/mhrd.jpg" alt="mhrd" />
                     </a>
                   </li>
                   <li>
-                    <a href="https://nkn.gov.in/en/" >
+                    <a href="https://nkn.gov.in/en/" target="_blank" rel="noreferrer">
                       <img className="w-[9rem] md:w-[14rem] h-auto" src="https://www.hpuniv.ac.in/images/ki.jpg" alt="nkn" />
                     </a>
                   </li>
                   <li>
-                    <a href="http://meity.gov.in/" >
+                    <a href="http://meity.gov.in/" target="_blank" rel="noreferrer">
                       <img className="w-[9rem] md:w-[14rem] h-auto" src="https://www.hpuniv.ac.in/images/miety.jpg" alt="miety" />
                     </a>
                   </li>
                   <li>
-                    <a href="https://www.mygov.in/" >
+                    <a href="https://www.mygov.in/" target="_blank" rel="noreferrer">
                       <img className="w-[9rem] md:w-[14rem] h-auto" src="https://www.hpuniv.ac.in/images-html/mygov.jpg" alt="mygov" />
                     </a>
                   </li>
                   <li>
-                    <a href="https://mhrdnats.gov.in/" >
+                    <a href="https://mhrdnats.gov.in/" target="_blank" rel="noreferrer">
                       <img className="w-[9rem] md:w-[14rem] h-auto" src="https://www.hpuniv.ac.in/images-html/nats.jpg" alt="nats" />
                     </a>
                   </li>
                   <li>
-                    <a href="https://www.ugcnetonline.in/" >
+                    <a href="https://www.ugcnetonline.in/" target="_blank" rel="noreferrer">
                       <img className="w-[9rem] md:w-[14rem] h-auto" src="https://www.hpuniv.ac.in/images-html/ugc.jpg" alt="ugc" />
                     </a>
                   </li>
                 </ul>
                 <ul className="flex items-center justify-center md:justify-start [&_li]:mx-8 [&_img]:max-w-none animate-scroll" aria-hidden="true">
                 <li>         
-                    <a href="https://www.g20.org/en/">
+                    <a href="https://www.g20.org/en/" target="_blank" rel="noreferrer">
                       <img className="w-[9rem] md:w-[14rem] h-auto" src="https://www.hpuniv.ac.in/img/g20.png" alt="G20" />
                     </a>
                   </li>
                   <li>
-                    <a href="https://email.gov.in/">
+                    <a href="https://email.gov.in/" target="_blank" rel="noreferrer">
                       <img className="w-[9rem] md:w-[14rem] h-auto" src="https://www.hpuniv.ac.in/images/gov.jpg" alt="gov" />
                     </a>
                   </li>
                   <li>
-                    <a href="https://himachal.nic.in/en-IN/" >
+                    <a href="https://himachal.nic.in/en-IN/" target="_blank" rel="noreferrer">
                       <img className="w-[9rem] md:w-[14rem] h-auto" src="https://www.hpuniv.ac.in/images-html/hpgovernment.jpg" alt="hp government" />
                     </a>
                   </li>
                   <li>
-                    <a href="https://www.india.gov.in/" >
+                    <a href="https://www.india.gov.in/" target="_blank" rel="noreferrer">
                       <img className="w-[9rem] md:w-[14rem] h-auto" src="https://www.hpuniv.ac.in/images/gov.jpg" alt="gov india" />
                     </a>
                   </li>
                   <li>
-                    <a href="https://mhrd.gov.in/" >
+                    <a href="https://mhrd.gov.in/" target="_blank" rel="noreferrer">
                       <img className="w-[9rem] md:w-[14rem] h-auto" src="https://www.hpuniv.ac.in/images-html/mhrd.jpg" alt="mhrd" />
                     </a>
                   </li>
                   <li>
-                    <a href="https://nkn.gov.in/en/" >
+                    <a href="https://nkn.gov.in/en/" target="_blank" rel="noreferrer">
                       <img className="w-[9rem] md:w-[14rem] h-auto" src="https://www.hpuniv.ac.in/images/ki.jpg" alt="nkn" />
                     </a>
                   </li>
                   <li>
-                    <a href="http://meity.gov.in/" >
+                    <a href="http://meity.gov.in/" target="_blank" rel="noreferrer">
                       <img className="w-[9rem] md:w-[14rem] h-auto" src="https://www.hpuniv.ac.in/images/miety.jpg" alt="miety" />
                     </a>
                   </li>
                   <li>
-                    <a href="https://www.mygov.in/" >
+                    <a href="https://www.mygov.in/" target="_blank" rel="noreferrer">
                       <img className="w-[9rem] md:w-[14rem] h-auto" src="https://www.hpuniv.ac.in/images-html/mygov.jpg" alt="mygov" />
                     </a>
                   </li>
                   <li>
-                    <a href="https://mhrdnats.gov.in/" >
+                    <a href="https://mhrdnats.gov.in/" target="_blank" rel="noreferrer">
                       <img className="w-[9rem] md:w-[14rem] h-auto" src="https://www.hpuniv.ac.in/images-html/nats.jpg" alt="nats" />
                     </a>
                   </li>
                   <li>
-                    <a href="https://www.ugcnetonline.in/" >
+                    <a href="https://www.ugcnetonline.in/" target="_blank" rel="noreferrer">
                       <img className="w-[9rem] md:w-[14rem] h-auto" src="https://www.hpuniv.ac.in/images-html/ugc.jpg" alt="ugc" />
                     </a>
                   </li>
@@ -348,7 +348,7 @@ const toggleMenu = () => setMenuOpen(!menuOpen);
           </div>
           <hr className="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
           <div className="flex sitems-center justify-center">
-            <span className="text-sm text-gray-500 text-center dark:text-gray-400">© 2025 <a href="https://digitcrib.com/" className="hover:underline">DigitCrib™</a>. All Rights Reserved.
+            <span className="text-sm text-gray-500 text-center dark:text-gray-400">© 2025 <a href="https://digitcrib.in/" target="_blank" rel="noreferrer" className="hover:underline">DigitCrib™</a>. All Rights Reserved.
             </span> 
           </div>
         </div>

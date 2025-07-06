@@ -1,11 +1,17 @@
 import React from 'react'
+import { ReactComponent as LibLogo } from "../../assets/img/lib-logo.svg";
+import { Link } from "react-router-dom";
 
 const TermsAndConditions = () => {
   return (
     
     <>
         <div className= "w-full h-full bg-gradient-to-b from-[#0a433d] via-[#0a433d63] to-[#C21717] py-16 px-4 text-gray-800 font-sans">
-            <div className="max-w-4xl mx-auto p-6 bg-gray-100 shadow-lg rounded-2xl">
+            <Link to="/" className="ml-[4rem] flex items-center fixed space-x-3 rtl:space-x-reverse bg-white/30 backdrop-blur-md border border-white/20 rounded-3xl py-1 px-4">
+                <LibLogo className="h-11 w-11" alt="UCBS Library Management System Logo"/>
+                <span className="self-center text-2xl font-semibold whitespace-nowrap text-white">UCBS Library</span>
+            </Link>
+            <div className="max-w-4xl mx-auto p-6 bg-gray-100 shadow-lg rounded-2xl">             
                 <h1 className="text-3xl font-bold text-center mb-6 text-[#C21717]">Terms and Conditions</h1>
                 <p className="text-sm text-center text-gray-500 mb-8">Last updated: <span className="font-medium">4 April 2025</span></p>
 
