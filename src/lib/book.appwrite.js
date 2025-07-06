@@ -1,4 +1,4 @@
-import { ID } from "appwrite";
+import { ID, Query } from "appwrite";
 import { databases } from "./appwrite";
 import { createBooksHistory } from './bookshistory.appwrite';
 
@@ -37,8 +37,12 @@ export const createBook = async (book) => {
 export const listBooks = async () => {
     const result = await databases.listDocuments(
         database_id,
-        collection_id
+        collection_id,
+        [
+            Query.limit(150)
+        ]
     );
+    console.log("Result", result);
     return result;
 }
 
