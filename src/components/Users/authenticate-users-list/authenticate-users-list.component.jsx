@@ -101,7 +101,7 @@ const AuthenticateUsersList = () => {
                                 DOB
                             </th>
                             <th scope="col" className="px-6 py-3">
-                                Class Roll No.
+                                Admission year
                             </th>
                             <th scope="col" className="px-6 py-3">
                                 Course
