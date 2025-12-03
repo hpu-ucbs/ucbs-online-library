@@ -134,8 +134,8 @@ const UpdateIssueFine = () => {
                             />
                             <FormInput 
                                 type="number" 
-                                placeholder="Roll No" 
-                                label="Roll Number *" 
+                                placeholder="Admission year" 
+                                label="admission_year*" 
                                 name="roll_no" 
                                 value={roll_no || ""} 
                                 readOnly 

@@ -25,7 +25,7 @@ const User = ({user_item}) => {
                     <div className="text-base">
                         <div>User ID: <span className="font-semibold underline">{user_id}</span></div>
                         <div>Name: <span className="font-semibold">{name}</span></div>
-                        <div>Class Roll No: <span className="font-semibold">{roll_no}</span></div>
+                        <div>Admission Year: <span className="font-semibold">{roll_no}</span></div>
                     </div>
                     <div className="text-base flex flex-col">
                         <div className="justify-self-end">Course: <span className="font-semibold">{course}</span></div>
