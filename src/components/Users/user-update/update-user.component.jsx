@@ -34,8 +34,8 @@ const UpdateNewUser = () => {
             newErrors.name = "Name is required";
         }
 
-        if (!user.roll_no || user.roll_no < 1000 || user.roll_no > 9999) {
-            newErrors.roll_no = "Roll No. must be between 1000 and 9999";
+        if (!user.roll_no || user.roll_no < 1000 || user.roll_no > 99999) {
+            newErrors.roll_no = "Roll No. must be between 1000 and 99999";
         }
 
         if (!user.user_id || user.user_id.toString().length !== 10) {
