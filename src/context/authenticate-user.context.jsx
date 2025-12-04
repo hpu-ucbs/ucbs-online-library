@@ -57,7 +57,7 @@ export const AuthUserProvider = ({ children }) => {
         if (!AuthUser) return "NoUser";
 
         try {
-             AuthUser.user_id = String(AuthUser.user_id).trim().slice(0, 10);
+             AuthUser.user_id = String(AuthUser.user_id).trim().slice(0, 20);
             // Check against fresh data from Appwrite
             const currentUsers = await listAuthUser();
             const exists = currentUsers.documents.some(
@@ -81,7 +81,7 @@ export const AuthUserProvider = ({ children }) => {
 
     const DeleteAuthUser = async (AuthUser) => {
         if (!AuthUser) return "NoUser";
- AuthUser.user_id = String(AuthUser.user_id).trim().slice(0, 10);
+ AuthUser.user_id = String(AuthUser.user_id).trim().slice(0, 20);
         try {
             // Check existence
             const currentUsers = await listAuthUser();

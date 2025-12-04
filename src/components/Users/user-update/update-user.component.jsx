@@ -38,8 +38,8 @@ const UpdateNewUser = () => {
             newErrors.roll_no = "Roll No. must be between 1000 and 9999";
         }
 
-        if (!user.user_id || user.user_id.toString().length !== 9) {
-            newErrors.user_id = "User ID must be exactly 9 digits";
+        if (!user.user_id || user.user_id.toString().length !== 10) {
+            newErrors.user_id = "User ID must be exactly 10 digits";
         }
 
         if (!user.password || user.password.length !== 10) {
