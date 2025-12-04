@@ -6,7 +6,7 @@ const collection_id = '67fabe3400007379401a';
 
 export const createAuthUser = async (authUser) => {
     let { user_id, password, name, roll_no, course, year, email } = authUser;
-    user_id = parseInt(user_id);
+    user_id = String(user_id ?? "").trim().slice(0, 20);
     roll_no = parseInt(roll_no);
     year = parseInt(year);
     let result = await databases.createDocument(
