@@ -15,7 +15,7 @@ export const createUser = async (user) => {
         collection_id,
         ID.unique(),
         {
-            user_ids,
+            user_id,
             password,
             name,
             roll_no,
