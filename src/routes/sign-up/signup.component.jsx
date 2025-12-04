@@ -36,17 +36,20 @@ const SignUp = () => {
 
   const validateForm = (user) => {
     const newErrors = {};
-    if (!user.name || user.name.trim() === "") {
-      newErrors.name = "Name is required";
-    }
+if (!user.name || user.name.trim() === "") {
+  newErrors.name = "Name is required";
+} else if (!/^\S+$/.test(user.name)) {
+  newErrors.name = "Name must not contain spaces";
+}
 
     if (!user.user_id || user.user_id.toString().length !== 9) {
-      newErrors.user_id = "Registration ID must be exactly 9 digits";
+      newErrors.user_id = "Registration ID must be exactly 9 digits make sure to enter 1000 for BCA and 2000 for BBA then your roll number";
     }
 
-    if (!user.email || !user.email.includes("@")) {
-      newErrors.email = "Email is required";
-    }
+if (!user.email || !/^[A-Za-z0-9._%+-]+@gmail\.com$/.test(user.email)) {
+  newErrors.email = "Please enter a valid Gmail address ending with @gmail.com";
+}
+
 
     if (!user.roll_no || user.roll_no < 1000 || user.roll_no > 9999) {
       newErrors.roll_no = "Range is 1000 and 9999";
@@ -122,18 +125,19 @@ const SignUp = () => {
                   </Link>
                   <form className="space-y-3 md:space-y-3" onSubmit={handleSubmit}>
                       <div>
-                          <FormInput value={selectedUser.name || ""} error={errors.name} onChange={handleChange} label={"Enter Full Name"} type="text" name="name" id="name" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="John Doe" required=""/>
+                          <FormInput value={selectedUser.name || ""} error={errors.name} onChange={handleChange} label={"Enter Full Name"} type="text" name="name" id="name" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="JohnDoe" required="" pattern="^\S+$" title="Name must not contain spaces"/>
                       </div>
                       <div>
-                          <FormInput value={selectedUser.user_id || ""} error={errors.user_id} onChange={handleChange} label={"Enter University Registration No."} type="number" name="user_id" id="user_id" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="•••••••••" required=""/>
+                          <FormInput value={selectedUser.user_id || ""} error={errors.user_id} onChange={handleChange} label={"Enter Your Roll number "} type="number" name="user_id" id="user_id" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="  1000 for BCA 2000 for BBA then your roll number" required=""/>
                       </div>
                       <div> 
-                          <FormInput value={selectedUser.email || ""} error={errors.email} onChange={handleChange} label={"Enter Email"} type="email" name="email" id="email" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="example@gmail.com" required=""/>
+                          <FormInput value={selectedUser.email || ""} error={errors.email} onChange={handleChange} label={"Enter Email"} type="email" name="email" id="email" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="abc@gmail.com" required="" pattern="^[A-Za-z0-9._%+-]+@gmail\.com$"
+  title="Email must end with @gmail.com"/>
                       </div>
 
                       <div className={`flex justify-between items-center ${errors.course || errors.roll_no ? 'mt-0' : 'mb-0'}`}>
                         <div>
-                            <FormInput value={selectedUser.roll_no || ""} error={errors.roll_no} onChange={handleChange} label={"Enter Class Roll No."} type="number" name="roll_no" id="roll_no" placeholder="••••" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-36 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required=""/>
+                            <FormInput value={selectedUser.roll_no || ""} error={errors.roll_no} onChange={handleChange} label={"Enter Admission Year."} type="number" name="roll_no" id="roll_no" placeholder="20--" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-36 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required=""/>
                         </div>
                         
                         <div className="relative">
@@ -175,7 +179,7 @@ const SignUp = () => {
                             }
                             dateFormat="dd/MM/yyyy"
                             placeholderText="DD/MM/YYYY"
-                            maxDate={new Date()}
+                            maxDate={new Date("2009-12-31")}
                             showYearDropdown
                             scrollableYearDropdown
                             yearDropdownItemNumber={100}
