@@ -38,12 +38,13 @@ const SignUp = () => {
     const newErrors = {};
 if (!user.name || user.name.trim() === "") {
   newErrors.name = "Name is required";
-} else if (!/^\S+$/.test(user.name)) {
-  newErrors.name = "Name must not contain spaces";
+} else if (!/^[A-Za-z\s]+$/.test(user.name)) {
+  // allow only letters and spaces (no numbers or special characters)
+  newErrors.name = "Name can contain only letters and spaces";
 }
 
     if (!user.user_id || user.user_id.toString().length !== 10) {
-      newErrors.user_id = "Phone number must be 10 digits";
+      newErrors.user_id = "Exam roll number must be 10 digits";
     }
 
 if (!user.email || !/^[A-Za-z0-9._%+-]+@gmail\.com$/.test(user.email)) {
@@ -125,10 +126,10 @@ if (!user.email || !/^[A-Za-z0-9._%+-]+@gmail\.com$/.test(user.email)) {
                   </Link>
                   <form className="space-y-3 md:space-y-3" onSubmit={handleSubmit}>
                       <div>
-                          <FormInput value={selectedUser.name || ""} error={errors.name} onChange={handleChange} label={"Enter Full Name"} type="text" name="name" id="name" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="JohnDoe" required="" pattern="^\S+$" title="Name must not contain spaces"/>
+                          <FormInput value={selectedUser.name || ""} error={errors.name} onChange={handleChange} label={"Enter Full Name"} type="text" name="name" id="name" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="John Doe" required="" pattern="^[A-Za-z\\s]+$" title="Only letters and spaces allowed (no numbers or symbols)"/>
                       </div>
                       <div>
-                          <FormInput value={selectedUser.user_id || ""} error={errors.user_id} onChange={handleChange} label={"Enter Your Phone number "} type="text" name="user_id" id="user_id" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="780780XXXX" required=""inputMode="numeric"/>
+                          <FormInput value={selectedUser.user_id || ""} error={errors.user_id} onChange={handleChange} label={"Enter Your Exam Roll No"} type="text" name="user_id" id="user_id" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="6240000000" required=""inputMode="numeric" pattern="[0-9]{10}"/>
                       </div>
                       <div> 
                           <FormInput value={selectedUser.email || ""} error={errors.email} onChange={handleChange} label={"Enter Email"} type="email" name="email" id="email" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="abc@gmail.com" required="" pattern="^[^@]+@gmail\.com$"
