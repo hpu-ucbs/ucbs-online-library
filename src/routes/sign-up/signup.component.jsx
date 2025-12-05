@@ -38,9 +38,9 @@ const SignUp = () => {
     const newErrors = {};
 if (!user.name || user.name.trim() === "") {
   newErrors.name = "Name is required";
-} else if (!/^[A-Za-z\s]+$/.test(user.name)) {
-  // allow only letters and spaces (no numbers or special characters)
-  newErrors.name = "Name can contain only letters and spaces";
+} else if (!/^[A-Za-z]+(?: [A-Za-z]+)*$/.test(user.name)) {
+  // starts with a letter, allows single spaces between words, no leading/trailing spaces, no numbers or special chars
+  newErrors.name = "Name must contain only letters and single spaces (no leading/trailing spaces)";
 }
 
     if (!user.user_id || user.user_id.toString().length !== 10) {
@@ -126,7 +126,7 @@ if (!user.email || !/^[A-Za-z0-9._%+-]+@gmail\.com$/.test(user.email)) {
                   </Link>
                   <form className="space-y-3 md:space-y-3" onSubmit={handleSubmit}>
                       <div>
-                          <FormInput value={selectedUser.name || ""} error={errors.name} onChange={handleChange} label={"Enter Full Name"} type="text" name="name" id="name" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="John Doe" required="" pattern="^[A-Za-z\\s]+$" title="Only letters and spaces allowed (no numbers or symbols)"/>
+                          <FormInput value={selectedUser.name || ""} error={errors.name} onChange={handleChange} label={"Enter Full Name"} type="text" name="name" id="name" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="John Doe" required="" pattern="^[A-Za-z]+(?: [A-Za-z]+)*$" title="Only letters allowed; single spaces between words; no leading/trailing spaces"/>
                       </div>
                       <div>
                           <FormInput value={selectedUser.user_id || ""} error={errors.user_id} onChange={handleChange} label={"Enter Your Exam Roll No"} type="text" name="user_id" id="user_id" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="6240000000" required=""inputMode="numeric" pattern="[0-9]{10}"/>
