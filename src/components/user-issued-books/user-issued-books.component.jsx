@@ -14,6 +14,17 @@ const UserIssuedBooks = () => {
                     <div>
                         <div className="py-4 sm:py-[2rem]">
                             <div className="px-0 sm:px-[2rem]">
+                                <div className="mb-4">
+                                    <div className="border border-red-200 bg-red-50 text-black rounded-md px-5 py-4 shadow-sm">
+                                        <ol className="list-decimal list-inside space-y-2 text-sm sm:text-base">
+                                            <li><span className="font-semibold">Two books</span> to BCA and BBA students will be issued for a period of 7 days.</li>
+                                            <li><span className="font-semibold">Delay fine:</span> Books returned after the due date will incur a fine — first 7 days: 50 per day per volume; subsequent period: 100 per day per volume.</li>
+                                            <li><span className="font-semibold">Damage / replacement:</span> Reader must replace or pay five times the current price for books mutilated or marked by them.</li>
+                                            <li><span className="font-semibold">Recall:</span> Any book can be recalled by the librarian at any time.</li>
+                                            <li><span className="font-semibold">Overdue restriction:</span> If a book becomes overdue, further books will not be issued until such books are returned.</li>
+                                        </ol>
+                                    </div>
+                                </div>
                                 <div>
                                     <h1 className="text-3xl sm:text-4xl font-bold">Issued Books.</h1>
                                 </div>                  
