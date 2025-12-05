@@ -55,11 +55,11 @@ const UserLogIn = () => {
       <form className="max-w-lg w-full mx-auto">
 
         <div className="mt-8">
-            <FormInput type="text" placeholder="Enter User ID" onChange={handleChange} label="User ID" name="user_id" value={user_id} id="user_id" svgicon={SvgComponent1}/>
+            <FormInput type="text" placeholder="Enter Exam Roll No" onChange={handleChange} label="Exam Roll NO" name="user_id" value={user_id} id="user_id" svgicon={SvgComponent1}/>
         </div>
       
         <div className="mt-8">
-            <FormInput type="password" placeholder="Enter Password" onChange={handleChange} label="Password (use format DD/MM/YYYY)" name="password" id="password" value={password} svgicon={SvgComponent2}/>
+            <FormInput type="password" placeholder="Enter Password" onChange={handleChange} label="Enter D.O.B (use format DD/MM/YYYY)" name="password" id="password" value={password} svgicon={SvgComponent2}/>
         </div>
 
         <div className="mt-8">
