@@ -25,19 +25,30 @@ const UserIssuedBooks = () => {
                         <div className="py-4 sm:py-[2rem]">
                             <div className="px-0 sm:px-[2rem]">
 
-                                {/* Announcement Ticker */}
-                                <div className="w-full overflow-hidden bg-red-50 border border-red-200 rounded-md shadow-sm py-2">
-                                    <div
-                                        className="whitespace-nowrap inline-block text-sm sm:text-base text-black font-medium px-5"
-                                        style={{ animation: "scroll-left 40s linear infinite" }}
-                                    >
-                                        • Two books to BCA and BBA students will be issued for 7 days. &nbsp;&nbsp;
-                                        • Delay fine: First 7 days ₹50/day/volume, then ₹100/day/volume. &nbsp;&nbsp;
-                                        • Damage/replacement: Reader must replace or pay 5× current price. &nbsp;&nbsp;
-                                        • Any book can be recalled anytime. &nbsp;&nbsp;
-                                        • Overdue: No more books issued until return. &nbsp;&nbsp;
-                                    </div>
-                                </div>
+                             {/* Announcement Ticker */}
+<div className="w-full flex items-center gap-3 bg-red-50 border border-red-200 rounded-md shadow-sm py-2 px-3">
+
+    {/* Static Label */}
+    <div className="bg-red-200 text-red-800 font-semibold text-xs sm:text-sm px-3 py-1 rounded-md whitespace-nowrap">
+        Important Notification
+    </div>
+
+    {/* Scrolling Text */}
+    <div className="overflow-hidden flex-1">
+        <div
+            className="whitespace-nowrap inline-block text-sm sm:text-base text-black font-medium"
+            style={{ animation: "scroll-left 40s linear infinite" }}
+        >
+            • Two books to BCA and BBA students will be issued for 7 days. &nbsp;&nbsp;
+            • Delay fine: First 7 days ₹50/day/volume, then ₹100/day/volume. &nbsp;&nbsp;
+            • Damage/replacement: Reader must replace or pay 5× current price. &nbsp;&nbsp;
+            • Any book can be recalled anytime. &nbsp;&nbsp;
+            • Overdue: No more books issued until return. &nbsp;&nbsp;
+        </div>
+    </div>
+
+</div>
+
 
                                 <div>
                                     <h1 className="text-3xl sm:text-4xl font-bold">Issued Books.</h1>
